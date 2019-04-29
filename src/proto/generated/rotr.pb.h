@@ -347,29 +347,29 @@ class NodeInfo :
   std::string* release_hostname();
   void set_allocated_hostname(std::string* hostname);
 
-  // string brokerClusterId = 4;
-  void clear_brokerclusterid();
-  static const int kBrokerClusterIdFieldNumber = 4;
-  const std::string& brokerclusterid() const;
-  void set_brokerclusterid(const std::string& value);
-  void set_brokerclusterid(std::string&& value);
-  void set_brokerclusterid(const char* value);
-  void set_brokerclusterid(const char* value, size_t size);
-  std::string* mutable_brokerclusterid();
-  std::string* release_brokerclusterid();
-  void set_allocated_brokerclusterid(std::string* brokerclusterid);
+  // string clusterId = 4;
+  void clear_clusterid();
+  static const int kClusterIdFieldNumber = 4;
+  const std::string& clusterid() const;
+  void set_clusterid(const std::string& value);
+  void set_clusterid(std::string&& value);
+  void set_clusterid(const char* value);
+  void set_clusterid(const char* value, size_t size);
+  std::string* mutable_clusterid();
+  std::string* release_clusterid();
+  void set_allocated_clusterid(std::string* clusterid);
 
-  // string brokerClusterName = 5;
-  void clear_brokerclustername();
-  static const int kBrokerClusterNameFieldNumber = 5;
-  const std::string& brokerclustername() const;
-  void set_brokerclustername(const std::string& value);
-  void set_brokerclustername(std::string&& value);
-  void set_brokerclustername(const char* value);
-  void set_brokerclustername(const char* value, size_t size);
-  std::string* mutable_brokerclustername();
-  std::string* release_brokerclustername();
-  void set_allocated_brokerclustername(std::string* brokerclustername);
+  // string clusterName = 5;
+  void clear_clustername();
+  static const int kClusterNameFieldNumber = 5;
+  const std::string& clustername() const;
+  void set_clustername(const std::string& value);
+  void set_clustername(std::string&& value);
+  void set_clustername(const char* value);
+  void set_clustername(const char* value, size_t size);
+  std::string* mutable_clustername();
+  std::string* release_clustername();
+  void set_allocated_clustername(std::string* clustername);
 
   // bool isLeader = 3;
   void clear_isleader();
@@ -384,8 +384,8 @@ class NodeInfo :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ipv4address_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr hostname_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr brokerclusterid_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr brokerclustername_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clusterid_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clustername_;
   bool isleader_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_rotr_2eproto;
@@ -860,106 +860,106 @@ inline void NodeInfo::set_isleader(bool value) {
   // @@protoc_insertion_point(field_set:rotr.NodeInfo.isLeader)
 }
 
-// string brokerClusterId = 4;
-inline void NodeInfo::clear_brokerclusterid() {
-  brokerclusterid_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+// string clusterId = 4;
+inline void NodeInfo::clear_clusterid() {
+  clusterid_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline const std::string& NodeInfo::brokerclusterid() const {
-  // @@protoc_insertion_point(field_get:rotr.NodeInfo.brokerClusterId)
-  return brokerclusterid_.GetNoArena();
+inline const std::string& NodeInfo::clusterid() const {
+  // @@protoc_insertion_point(field_get:rotr.NodeInfo.clusterId)
+  return clusterid_.GetNoArena();
 }
-inline void NodeInfo::set_brokerclusterid(const std::string& value) {
+inline void NodeInfo::set_clusterid(const std::string& value) {
   
-  brokerclusterid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:rotr.NodeInfo.brokerClusterId)
+  clusterid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:rotr.NodeInfo.clusterId)
 }
-inline void NodeInfo::set_brokerclusterid(std::string&& value) {
+inline void NodeInfo::set_clusterid(std::string&& value) {
   
-  brokerclusterid_.SetNoArena(
+  clusterid_.SetNoArena(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:rotr.NodeInfo.brokerClusterId)
+  // @@protoc_insertion_point(field_set_rvalue:rotr.NodeInfo.clusterId)
 }
-inline void NodeInfo::set_brokerclusterid(const char* value) {
+inline void NodeInfo::set_clusterid(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  brokerclusterid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:rotr.NodeInfo.brokerClusterId)
+  clusterid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:rotr.NodeInfo.clusterId)
 }
-inline void NodeInfo::set_brokerclusterid(const char* value, size_t size) {
+inline void NodeInfo::set_clusterid(const char* value, size_t size) {
   
-  brokerclusterid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  clusterid_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:rotr.NodeInfo.brokerClusterId)
+  // @@protoc_insertion_point(field_set_pointer:rotr.NodeInfo.clusterId)
 }
-inline std::string* NodeInfo::mutable_brokerclusterid() {
+inline std::string* NodeInfo::mutable_clusterid() {
   
-  // @@protoc_insertion_point(field_mutable:rotr.NodeInfo.brokerClusterId)
-  return brokerclusterid_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:rotr.NodeInfo.clusterId)
+  return clusterid_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline std::string* NodeInfo::release_brokerclusterid() {
-  // @@protoc_insertion_point(field_release:rotr.NodeInfo.brokerClusterId)
+inline std::string* NodeInfo::release_clusterid() {
+  // @@protoc_insertion_point(field_release:rotr.NodeInfo.clusterId)
   
-  return brokerclusterid_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  return clusterid_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline void NodeInfo::set_allocated_brokerclusterid(std::string* brokerclusterid) {
-  if (brokerclusterid != nullptr) {
+inline void NodeInfo::set_allocated_clusterid(std::string* clusterid) {
+  if (clusterid != nullptr) {
     
   } else {
     
   }
-  brokerclusterid_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), brokerclusterid);
-  // @@protoc_insertion_point(field_set_allocated:rotr.NodeInfo.brokerClusterId)
+  clusterid_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), clusterid);
+  // @@protoc_insertion_point(field_set_allocated:rotr.NodeInfo.clusterId)
 }
 
-// string brokerClusterName = 5;
-inline void NodeInfo::clear_brokerclustername() {
-  brokerclustername_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+// string clusterName = 5;
+inline void NodeInfo::clear_clustername() {
+  clustername_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline const std::string& NodeInfo::brokerclustername() const {
-  // @@protoc_insertion_point(field_get:rotr.NodeInfo.brokerClusterName)
-  return brokerclustername_.GetNoArena();
+inline const std::string& NodeInfo::clustername() const {
+  // @@protoc_insertion_point(field_get:rotr.NodeInfo.clusterName)
+  return clustername_.GetNoArena();
 }
-inline void NodeInfo::set_brokerclustername(const std::string& value) {
+inline void NodeInfo::set_clustername(const std::string& value) {
   
-  brokerclustername_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:rotr.NodeInfo.brokerClusterName)
+  clustername_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:rotr.NodeInfo.clusterName)
 }
-inline void NodeInfo::set_brokerclustername(std::string&& value) {
+inline void NodeInfo::set_clustername(std::string&& value) {
   
-  brokerclustername_.SetNoArena(
+  clustername_.SetNoArena(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:rotr.NodeInfo.brokerClusterName)
+  // @@protoc_insertion_point(field_set_rvalue:rotr.NodeInfo.clusterName)
 }
-inline void NodeInfo::set_brokerclustername(const char* value) {
+inline void NodeInfo::set_clustername(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  brokerclustername_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:rotr.NodeInfo.brokerClusterName)
+  clustername_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:rotr.NodeInfo.clusterName)
 }
-inline void NodeInfo::set_brokerclustername(const char* value, size_t size) {
+inline void NodeInfo::set_clustername(const char* value, size_t size) {
   
-  brokerclustername_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  clustername_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:rotr.NodeInfo.brokerClusterName)
+  // @@protoc_insertion_point(field_set_pointer:rotr.NodeInfo.clusterName)
 }
-inline std::string* NodeInfo::mutable_brokerclustername() {
+inline std::string* NodeInfo::mutable_clustername() {
   
-  // @@protoc_insertion_point(field_mutable:rotr.NodeInfo.brokerClusterName)
-  return brokerclustername_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:rotr.NodeInfo.clusterName)
+  return clustername_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline std::string* NodeInfo::release_brokerclustername() {
-  // @@protoc_insertion_point(field_release:rotr.NodeInfo.brokerClusterName)
+inline std::string* NodeInfo::release_clustername() {
+  // @@protoc_insertion_point(field_release:rotr.NodeInfo.clusterName)
   
-  return brokerclustername_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  return clustername_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline void NodeInfo::set_allocated_brokerclustername(std::string* brokerclustername) {
-  if (brokerclustername != nullptr) {
+inline void NodeInfo::set_allocated_clustername(std::string* clustername) {
+  if (clustername != nullptr) {
     
   } else {
     
   }
-  brokerclustername_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), brokerclustername);
-  // @@protoc_insertion_point(field_set_allocated:rotr.NodeInfo.brokerClusterName)
+  clustername_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), clustername);
+  // @@protoc_insertion_point(field_set_allocated:rotr.NodeInfo.clusterName)
 }
 
 // -------------------------------------------------------------------

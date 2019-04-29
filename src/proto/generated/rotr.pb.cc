@@ -120,8 +120,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_rotr_2eproto::offsets[] PROTOB
   PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, ipv4address_),
   PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, hostname_),
   PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, isleader_),
-  PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, brokerclusterid_),
-  PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, brokerclustername_),
+  PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, clusterid_),
+  PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, clustername_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::rotr::ClusterInfo, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -161,21 +161,21 @@ static ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptorsTable assign_descript
 const char descriptor_table_protodef_rotr_2eproto[] =
   "\n\nrotr.proto\022\004rotr\032\036google/protobuf/wrap"
   "pers.proto\"\?\n\006Status\022$\n\nstatusCode\030\001 \001(\016"
-  "2\020.rotr.StatusCode\022\017\n\007message\030\002 \001(\t\"w\n\010N"
+  "2\020.rotr.StatusCode\022\017\n\007message\030\002 \001(\t\"k\n\010N"
   "odeInfo\022\023\n\013ipV4Address\030\001 \001(\t\022\020\n\010hostName"
-  "\030\002 \001(\t\022\020\n\010isLeader\030\003 \001(\010\022\027\n\017brokerCluste"
-  "rId\030\004 \001(\t\022\031\n\021brokerClusterName\030\005 \001(\t\"t\n\013"
-  "ClusterInfo\022\023\n\013clusterName\030\001 \001(\t\022\021\n\tclus"
-  "terId\030\002 \001(\t\022\035\n\005nodes\030\003 \003(\0132\016.rotr.NodeIn"
-  "fo\022\036\n\006leader\030\005 \001(\0132\016.rotr.NodeInfo\"-\n\014No"
-  "deInfoList\022\035\n\005nodes\030\001 \003(\0132\016.rotr.NodeInf"
-  "o*0\n\nStatusCode\022\010\n\004None\020\000\022\013\n\007Failure\020\001\022\013"
-  "\n\007Success\020\0022\006\n\004RaftB\006\n\004rotrb\006proto3"
+  "\030\002 \001(\t\022\020\n\010isLeader\030\003 \001(\010\022\021\n\tclusterId\030\004 "
+  "\001(\t\022\023\n\013clusterName\030\005 \001(\t\"t\n\013ClusterInfo\022"
+  "\023\n\013clusterName\030\001 \001(\t\022\021\n\tclusterId\030\002 \001(\t\022"
+  "\035\n\005nodes\030\003 \003(\0132\016.rotr.NodeInfo\022\036\n\006leader"
+  "\030\005 \001(\0132\016.rotr.NodeInfo\"-\n\014NodeInfoList\022\035"
+  "\n\005nodes\030\001 \003(\0132\016.rotr.NodeInfo*0\n\nStatusC"
+  "ode\022\010\n\004None\020\000\022\013\n\007Failure\020\001\022\013\n\007Success\020\0022"
+  "\006\n\004RaftB\006\n\004rotrb\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_rotr_2eproto = {
   false, InitDefaults_rotr_2eproto, 
   descriptor_table_protodef_rotr_2eproto,
-  "rotr.proto", &assign_descriptors_table_rotr_2eproto, 475,
+  "rotr.proto", &assign_descriptors_table_rotr_2eproto, 463,
 };
 
 void AddDescriptors_rotr_2eproto() {
@@ -538,8 +538,8 @@ class NodeInfo::HasBitSetters {
 const int NodeInfo::kIpV4AddressFieldNumber;
 const int NodeInfo::kHostNameFieldNumber;
 const int NodeInfo::kIsLeaderFieldNumber;
-const int NodeInfo::kBrokerClusterIdFieldNumber;
-const int NodeInfo::kBrokerClusterNameFieldNumber;
+const int NodeInfo::kClusterIdFieldNumber;
+const int NodeInfo::kClusterNameFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 NodeInfo::NodeInfo()
@@ -559,13 +559,13 @@ NodeInfo::NodeInfo(const NodeInfo& from)
   if (from.hostname().size() > 0) {
     hostname_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.hostname_);
   }
-  brokerclusterid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from.brokerclusterid().size() > 0) {
-    brokerclusterid_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.brokerclusterid_);
+  clusterid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (from.clusterid().size() > 0) {
+    clusterid_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.clusterid_);
   }
-  brokerclustername_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from.brokerclustername().size() > 0) {
-    brokerclustername_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.brokerclustername_);
+  clustername_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (from.clustername().size() > 0) {
+    clustername_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.clustername_);
   }
   isleader_ = from.isleader_;
   // @@protoc_insertion_point(copy_constructor:rotr.NodeInfo)
@@ -576,8 +576,8 @@ void NodeInfo::SharedCtor() {
       &scc_info_NodeInfo_rotr_2eproto.base);
   ipv4address_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   hostname_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  brokerclusterid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  brokerclustername_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  clusterid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  clustername_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   isleader_ = false;
 }
 
@@ -589,8 +589,8 @@ NodeInfo::~NodeInfo() {
 void NodeInfo::SharedDtor() {
   ipv4address_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   hostname_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  brokerclusterid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  brokerclustername_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  clusterid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  clustername_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void NodeInfo::SetCachedSize(int size) const {
@@ -610,8 +610,8 @@ void NodeInfo::Clear() {
 
   ipv4address_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   hostname_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  brokerclusterid_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  brokerclustername_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  clusterid_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  clustername_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   isleader_ = false;
   _internal_metadata_.Clear();
 }
@@ -644,17 +644,17 @@ const char* NodeInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // string brokerClusterId = 4;
+      // string clusterId = 4;
       case 4: {
         if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) != 34) goto handle_unusual;
-        ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_brokerclusterid(), ptr, ctx, "rotr.NodeInfo.brokerClusterId");
+        ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_clusterid(), ptr, ctx, "rotr.NodeInfo.clusterId");
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // string brokerClusterName = 5;
+      // string clusterName = 5;
       case 5: {
         if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) != 42) goto handle_unusual;
-        ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_brokerclustername(), ptr, ctx, "rotr.NodeInfo.brokerClusterName");
+        ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_clustername(), ptr, ctx, "rotr.NodeInfo.clusterName");
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
@@ -726,30 +726,30 @@ bool NodeInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // string brokerClusterId = 4;
+      // string clusterId = 4;
       case 4: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_brokerclusterid()));
+                input, this->mutable_clusterid()));
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->brokerclusterid().data(), static_cast<int>(this->brokerclusterid().length()),
+            this->clusterid().data(), static_cast<int>(this->clusterid().length()),
             ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "rotr.NodeInfo.brokerClusterId"));
+            "rotr.NodeInfo.clusterId"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // string brokerClusterName = 5;
+      // string clusterName = 5;
       case 5: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (42 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_brokerclustername()));
+                input, this->mutable_clustername()));
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->brokerclustername().data(), static_cast<int>(this->brokerclustername().length()),
+            this->clustername().data(), static_cast<int>(this->clustername().length()),
             ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "rotr.NodeInfo.brokerClusterName"));
+            "rotr.NodeInfo.clusterName"));
         } else {
           goto handle_unusual;
         }
@@ -808,24 +808,24 @@ void NodeInfo::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(3, this->isleader(), output);
   }
 
-  // string brokerClusterId = 4;
-  if (this->brokerclusterid().size() > 0) {
+  // string clusterId = 4;
+  if (this->clusterid().size() > 0) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->brokerclusterid().data(), static_cast<int>(this->brokerclusterid().length()),
+      this->clusterid().data(), static_cast<int>(this->clusterid().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "rotr.NodeInfo.brokerClusterId");
+      "rotr.NodeInfo.clusterId");
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->brokerclusterid(), output);
+      4, this->clusterid(), output);
   }
 
-  // string brokerClusterName = 5;
-  if (this->brokerclustername().size() > 0) {
+  // string clusterName = 5;
+  if (this->clustername().size() > 0) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->brokerclustername().data(), static_cast<int>(this->brokerclustername().length()),
+      this->clustername().data(), static_cast<int>(this->clustername().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "rotr.NodeInfo.brokerClusterName");
+      "rotr.NodeInfo.clusterName");
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      5, this->brokerclustername(), output);
+      5, this->clustername(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -868,26 +868,26 @@ void NodeInfo::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(3, this->isleader(), target);
   }
 
-  // string brokerClusterId = 4;
-  if (this->brokerclusterid().size() > 0) {
+  // string clusterId = 4;
+  if (this->clusterid().size() > 0) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->brokerclusterid().data(), static_cast<int>(this->brokerclusterid().length()),
+      this->clusterid().data(), static_cast<int>(this->clusterid().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "rotr.NodeInfo.brokerClusterId");
+      "rotr.NodeInfo.clusterId");
     target =
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        4, this->brokerclusterid(), target);
+        4, this->clusterid(), target);
   }
 
-  // string brokerClusterName = 5;
-  if (this->brokerclustername().size() > 0) {
+  // string clusterName = 5;
+  if (this->clustername().size() > 0) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->brokerclustername().data(), static_cast<int>(this->brokerclustername().length()),
+      this->clustername().data(), static_cast<int>(this->clustername().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "rotr.NodeInfo.brokerClusterName");
+      "rotr.NodeInfo.clusterName");
     target =
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        5, this->brokerclustername(), target);
+        5, this->clustername(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -925,18 +925,18 @@ size_t NodeInfo::ByteSizeLong() const {
         this->hostname());
   }
 
-  // string brokerClusterId = 4;
-  if (this->brokerclusterid().size() > 0) {
+  // string clusterId = 4;
+  if (this->clusterid().size() > 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->brokerclusterid());
+        this->clusterid());
   }
 
-  // string brokerClusterName = 5;
-  if (this->brokerclustername().size() > 0) {
+  // string clusterName = 5;
+  if (this->clustername().size() > 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->brokerclustername());
+        this->clustername());
   }
 
   // bool isLeader = 3;
@@ -979,13 +979,13 @@ void NodeInfo::MergeFrom(const NodeInfo& from) {
 
     hostname_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.hostname_);
   }
-  if (from.brokerclusterid().size() > 0) {
+  if (from.clusterid().size() > 0) {
 
-    brokerclusterid_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.brokerclusterid_);
+    clusterid_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.clusterid_);
   }
-  if (from.brokerclustername().size() > 0) {
+  if (from.clustername().size() > 0) {
 
-    brokerclustername_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.brokerclustername_);
+    clustername_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.clustername_);
   }
   if (from.isleader() != 0) {
     set_isleader(from.isleader());
@@ -1021,9 +1021,9 @@ void NodeInfo::InternalSwap(NodeInfo* other) {
     GetArenaNoVirtual());
   hostname_.Swap(&other->hostname_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  brokerclusterid_.Swap(&other->brokerclusterid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  clusterid_.Swap(&other->clusterid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  brokerclustername_.Swap(&other->brokerclustername_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  clustername_.Swap(&other->clustername_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(isleader_, other->isleader_);
 }
