@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+option java_package = "rotr";
+
+package rotr;
+
+import "google/protobuf/wrappers.proto";
+
+// https://grpc.io/docs/tutorials/basic/c.html
+// protoc -I=. --cpp_out=./generated/ ./rotr.proto
+// protoc -I=. --grpc_out=./generated --plugin=protoc-gen-grpc=`which grpc_cpp_plugin` rotr.proto
+
+// status codes
+
+enum StatusCode {
+    None = 0;
+    Failure = 1;
+    Success = 2;
+}
+
+// common entities
+
+message Status {
+    StatusCode statusCode = 1;
+    string message = 2;
+}
+
+
+
+/////////////////////////////
+//
+// Broker
+//
+/////////////////////////////
+
+
+// services
+
+
+
+/////////////////////////////
+//
+// Controller
+//
+/////////////////////////////
+
+
+message NodeInfo {
+    string ipV4Address = 1;
+    string hostName = 2;
+    bool isLeader = 3;
+    string brokerClusterId = 4;
+    string brokerClusterName = 5;
+}
+
+message ClusterInfo {
+    string clusterName = 1;
+    string clusterId = 2;
+    repeated NodeInfo nodes = 3;
+    NodeInfo leader = 5;
+}
+
+
+message NodeInfoList {
+    repeated NodeInfo nodes = 1;
+}
+
+// request
+
+
+// responses
+
+
+// services
+
+service Raft {
+}
