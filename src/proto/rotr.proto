@@ -26,31 +26,12 @@ message Status {
 }
 
 
-
-/////////////////////////////
-//
-// Broker
-//
-/////////////////////////////
-
-
-// services
-
-
-
-/////////////////////////////
-//
-// Controller
-//
-/////////////////////////////
-
-
 message NodeInfo {
     string ipV4Address = 1;
     string hostName = 2;
     bool isLeader = 3;
-    string brokerClusterId = 4;
-    string brokerClusterName = 5;
+    string clusterId = 4;
+    string clusterName = 5;
 }
 
 message ClusterInfo {
