@@ -18,78 +18,78 @@
 #include <grpcpp/impl/codegen/sync_stream.h>
 namespace rotr {
 
-static const char* Raft_method_names[] = {
-  "/rotr.Raft/AppendEntries",
-  "/rotr.Raft/RequestVote",
+static const char* RaftInternalRPC_method_names[] = {
+  "/rotr.RaftInternalRPC/AppendEntries",
+  "/rotr.RaftInternalRPC/RequestVote",
 };
 
-std::unique_ptr< Raft::Stub> Raft::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+std::unique_ptr< RaftInternalRPC::Stub> RaftInternalRPC::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
   (void)options;
-  std::unique_ptr< Raft::Stub> stub(new Raft::Stub(channel));
+  std::unique_ptr< RaftInternalRPC::Stub> stub(new RaftInternalRPC::Stub(channel));
   return stub;
 }
 
-Raft::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
-  : channel_(channel), rpcmethod_AppendEntries_(Raft_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_RequestVote_(Raft_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+RaftInternalRPC::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
+  : channel_(channel), rpcmethod_AppendEntries_(RaftInternalRPC_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_RequestVote_(RaftInternalRPC_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
-::grpc::Status Raft::Stub::AppendEntries(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest& request, ::rotr::AppendEntriesResponse* response) {
+::grpc::Status RaftInternalRPC::Stub::AppendEntries(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest& request, ::rotr::AppendEntriesResponse* response) {
   return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_AppendEntries_, context, request, response);
 }
 
-void Raft::Stub::experimental_async::AppendEntries(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response, std::function<void(::grpc::Status)> f) {
+void RaftInternalRPC::Stub::experimental_async::AppendEntries(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response, std::function<void(::grpc::Status)> f) {
   return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_AppendEntries_, context, request, response, std::move(f));
 }
 
-::grpc::ClientAsyncResponseReader< ::rotr::AppendEntriesResponse>* Raft::Stub::AsyncAppendEntriesRaw(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::rotr::AppendEntriesResponse>* RaftInternalRPC::Stub::AsyncAppendEntriesRaw(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::rotr::AppendEntriesResponse>::Create(channel_.get(), cq, rpcmethod_AppendEntries_, context, request, true);
 }
 
-::grpc::ClientAsyncResponseReader< ::rotr::AppendEntriesResponse>* Raft::Stub::PrepareAsyncAppendEntriesRaw(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::rotr::AppendEntriesResponse>* RaftInternalRPC::Stub::PrepareAsyncAppendEntriesRaw(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::rotr::AppendEntriesResponse>::Create(channel_.get(), cq, rpcmethod_AppendEntries_, context, request, false);
 }
 
-::grpc::Status Raft::Stub::RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest& request, ::rotr::RequestVoteResponse* response) {
+::grpc::Status RaftInternalRPC::Stub::RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest& request, ::rotr::RequestVoteResponse* response) {
   return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_RequestVote_, context, request, response);
 }
 
-void Raft::Stub::experimental_async::RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response, std::function<void(::grpc::Status)> f) {
+void RaftInternalRPC::Stub::experimental_async::RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response, std::function<void(::grpc::Status)> f) {
   return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_RequestVote_, context, request, response, std::move(f));
 }
 
-::grpc::ClientAsyncResponseReader< ::rotr::RequestVoteResponse>* Raft::Stub::AsyncRequestVoteRaw(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::rotr::RequestVoteResponse>* RaftInternalRPC::Stub::AsyncRequestVoteRaw(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::rotr::RequestVoteResponse>::Create(channel_.get(), cq, rpcmethod_RequestVote_, context, request, true);
 }
 
-::grpc::ClientAsyncResponseReader< ::rotr::RequestVoteResponse>* Raft::Stub::PrepareAsyncRequestVoteRaw(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::rotr::RequestVoteResponse>* RaftInternalRPC::Stub::PrepareAsyncRequestVoteRaw(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::rotr::RequestVoteResponse>::Create(channel_.get(), cq, rpcmethod_RequestVote_, context, request, false);
 }
 
-Raft::Service::Service() {
+RaftInternalRPC::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Raft_method_names[0],
+      RaftInternalRPC_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< Raft::Service, ::rotr::AppendEntriesRequest, ::rotr::AppendEntriesResponse>(
-          std::mem_fn(&Raft::Service::AppendEntries), this)));
+      new ::grpc::internal::RpcMethodHandler< RaftInternalRPC::Service, ::rotr::AppendEntriesRequest, ::rotr::AppendEntriesResponse>(
+          std::mem_fn(&RaftInternalRPC::Service::AppendEntries), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Raft_method_names[1],
+      RaftInternalRPC_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< Raft::Service, ::rotr::RequestVoteRequest, ::rotr::RequestVoteResponse>(
-          std::mem_fn(&Raft::Service::RequestVote), this)));
+      new ::grpc::internal::RpcMethodHandler< RaftInternalRPC::Service, ::rotr::RequestVoteRequest, ::rotr::RequestVoteResponse>(
+          std::mem_fn(&RaftInternalRPC::Service::RequestVote), this)));
 }
 
-Raft::Service::~Service() {
+RaftInternalRPC::Service::~Service() {
 }
 
-::grpc::Status Raft::Service::AppendEntries(::grpc::ServerContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response) {
+::grpc::Status RaftInternalRPC::Service::AppendEntries(::grpc::ServerContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Raft::Service::RequestVote(::grpc::ServerContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response) {
+::grpc::Status RaftInternalRPC::Service::RequestVote(::grpc::ServerContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response) {
   (void) context;
   (void) request;
   (void) response;

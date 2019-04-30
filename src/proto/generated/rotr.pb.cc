@@ -333,16 +333,16 @@ const char descriptor_table_protodef_rotr_2eproto[] =
   " \001(\r\022\017\n\007success\030\002 \001(\010\"8\n\023RequestVoteResp"
   "onse\022\014\n\004term\030\001 \001(\r\022\023\n\013voteGranted\030\002 \001(\010*"
   "0\n\nStatusCode\022\010\n\004None\020\000\022\013\n\007Failure\020\001\022\013\n\007"
-  "Success\020\0022\230\001\n\004Raft\022J\n\rAppendEntries\022\032.ro"
-  "tr.AppendEntriesRequest\032\033.rotr.AppendEnt"
-  "riesResponse\"\000\022D\n\013RequestVote\022\030.rotr.Req"
-  "uestVoteRequest\032\031.rotr.RequestVoteRespon"
-  "se\"\000B\006\n\004rotrb\006proto3"
+  "Success\020\0022\243\001\n\017RaftInternalRPC\022J\n\rAppendE"
+  "ntries\022\032.rotr.AppendEntriesRequest\032\033.rot"
+  "r.AppendEntriesResponse\"\000\022D\n\013RequestVote"
+  "\022\030.rotr.RequestVoteRequest\032\031.rotr.Reques"
+  "tVoteResponse\"\000B\006\n\004rotrb\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_rotr_2eproto = {
   false, InitDefaults_rotr_2eproto, 
   descriptor_table_protodef_rotr_2eproto,
-  "rotr.proto", &assign_descriptors_table_rotr_2eproto, 1100,
+  "rotr.proto", &assign_descriptors_table_rotr_2eproto, 1111,
 };
 
 void AddDescriptors_rotr_2eproto() {

@@ -75,7 +75,7 @@ message RequestVoteResponse {
 }
 
 // services
-service Raft {
+service RaftInternalRPC {
     rpc AppendEntries (AppendEntriesRequest) returns (AppendEntriesResponse) {};
     rpc RequestVote (RequestVoteRequest) returns (RequestVoteResponse) {};
 }

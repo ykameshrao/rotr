@@ -30,10 +30,10 @@ class ServerContext;
 namespace rotr {
 
 // services
-class Raft final {
+class RaftInternalRPC final {
  public:
   static constexpr char const* service_full_name() {
-    return "rotr.Raft";
+    return "rotr.RaftInternalRPC";
   }
   class StubInterface {
    public:
