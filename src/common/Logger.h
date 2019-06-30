@@ -5,76 +5,84 @@
 #ifndef ROTR_LOGGER_H
 #define ROTR_LOGGER_H
 
+#include <iostream>
+#include <memory>
+
 #include <spdlog/spdlog.h>
-#include <spdlog/async_logger.h>
+#include <spdlog/sinks/basic_file_sink.h>
+#include <spdlog/sinks/stdout_sinks.h>
+
+using namespace std;
 
 class Logger {
-    std::shared_ptr<spdlog::logger> _console;
-    std::shared_ptr<spdlog::logger> _file;
+    unique_ptr<spdlog::logger> _logger;
 
 public:
-    Logger(std::string fileNameWithPath) {
-        spdlog::flush_on(spdlog::level::debug);
-        spdlog::set_pattern("[%l] [%H:%M:%S %z] [%n] [pid %P] [thread %t] %v");
-        spdlog::set_level(spdlog::level::debug);
-        spdlog::set_async_mode(4096);
-        _file = spdlog::rotating_logger_mt("async_file_logger", fileNameWithPath, 4096, 4096);
-        _console = spdlog::stdout_color_mt("console");
+    Logger(string fileNameWithPath) {
+        auto file = make_shared<spdlog::sinks::basic_file_sink_mt>(fileNameWithPath, true);
+        file->set_level(spdlog::level::debug);
+        file->set_pattern("[%l] [%H:%M:%S %z] [%n] [pid %P] [thread %t] %v");
+
+        auto console = make_shared<spdlog::sinks::stdout_sink_mt>();
+        console->set_level(spdlog::level::debug);
+        console->set_pattern("[%l] [%H:%M:%S %z] [%n] [pid %P] [thread %t] %v");
+
+        _logger = make_unique<spdlog::logger>("app_main_logger", spdlog::sinks_init_list{file, console});
     }
 
     ~Logger() {
-        spdlog::drop_all();
+        _logger.release();
     }
 
     template<typename T>
     void info(const T& message) {
-        spdlog::apply_all([&](std::shared_ptr<spdlog::logger> l) { l->info(message); });
+        _logger->info(message);
     }
 
     template<typename T>
     void error(const T& message) {
-        spdlog::apply_all([&](std::shared_ptr<spdlog::logger> l) { l->error(message); });
+        _logger->error(message);
     }
 
     template<typename T>
     void debug(const T& message) {
-        spdlog::apply_all([&](std::shared_ptr<spdlog::logger> l) { l->debug(message); });
+        _logger->debug(message);
     }
 
     template<typename T>
     void critical(const T& message) {
-        spdlog::apply_all([&](std::shared_ptr<spdlog::logger> l) { l->critical(message); });
+        _logger->critical(message);
     }
 
     template<typename T>
     void warn(const T& message) {
-        spdlog::apply_all([&](std::shared_ptr<spdlog::logger> l) { l->warn(message); });
+        _logger->warn(message);
     }
 
     template <typename Arg1, typename... Args>
     void info(const char* fmt, const Arg1 &arg1, const Args&... args) {
-        spdlog::apply_all([&](std::shared_ptr<spdlog::logger> l) { l->info(fmt, arg1, args...); });
+        _logger->info(fmt, arg1, args...);
     }
 
     template <typename Arg1, typename... Args>
     void error(const char* fmt, const Arg1 &arg1, const Args&... args) {
-        spdlog::apply_all([&](std::shared_ptr<spdlog::logger> l) { l->error(fmt, arg1, args...); });
+        _logger->error(fmt, arg1, args...);
     }
 
     template <typename Arg1, typename... Args>
     void debug(const char* fmt, const Arg1 &arg1, const Args&... args) {
-        spdlog::apply_all([&](std::shared_ptr<spdlog::logger> l) { l->debug(fmt, arg1, args...); });
+        _logger->debug(fmt, arg1, args...);
     }
 
     template <typename Arg1, typename... Args>
     void critical(const char* fmt, const Arg1 &arg1, const Args&... args) {
-        spdlog::apply_all([&](std::shared_ptr<spdlog::logger> l) { l->critical(fmt, arg1, args...); });
+        _logger->critical(fmt, arg1, args...);
     }
 
     template <typename Arg1, typename... Args>
     void warn(const char* fmt, const Arg1 &arg1, const Args&... args) {
-        spdlog::apply_all([&](std::shared_ptr<spdlog::logger> l) { l->warn(fmt, arg1, args...); });
+        _logger->warn(fmt, arg1, args...);
     }
 };
 
-#endif //MYCRAFT_LOGGER_H
+#endif //COMMON_LOGGER_H

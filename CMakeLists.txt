@@ -28,7 +28,7 @@ link_libraries(grpc++_unsecure grpc gpr pthread ${PROTOBUF_LIBRARY} rocksdb)
 file(GLOB_RECURSE SOURCE_FILES "src/**")
 file(GLOB_RECURSE COMMON_SOURCE_FILES "src/common/**")
 file(GLOB_RECURSE PBF_SOURCE_FILES "src/proto/**")
-set(SOURCE ${SOURCE_FILES} ${COMMON_SOURCE_FILES} ${PBF_SOURCE_FILES})
+set(SOURCE ${SOURCE_FILES} ${COMMON_SOURCE_FILES} ${PBF_SOURCE_FILES} Main.cpp)
 
 set(MODULE_NAME "rotr")
 add_executable(${MODULE_NAME} ${SOURCE})
