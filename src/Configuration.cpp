@@ -52,5 +52,5 @@ rotr::Configuration::Configuration(int argc, char **argv) {
     }
 
     logger->info("Node be reachable at : {}", opt->getValue("start-at"));
-    logger->info("Cluster seeds at        : {}", opt->getValue("seeds"));
+    logger->info("Cluster seeds at     : {}", opt->getValue("seeds"));
 }

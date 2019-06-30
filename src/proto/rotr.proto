@@ -4,8 +4,6 @@ option java_package = "rotr";
 
 package rotr;
 
-import "google/protobuf/wrappers.proto";
-
 // https://grpc.io/docs/tutorials/basic/c.html
 // protoc -I=. --cpp_out=./generated/ ./rotr.proto
 // protoc -I=. --grpc_out=./generated --plugin=protoc-gen-grpc=`which grpc_cpp_plugin` rotr.proto
