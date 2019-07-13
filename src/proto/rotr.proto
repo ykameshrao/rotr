@@ -4,6 +4,8 @@ option java_package = "rotr";
 
 package rotr;
 
+import "google/protobuf/wrappers.proto";
+
 // https://grpc.io/docs/tutorials/basic/c.html
 // protoc -I=. --cpp_out=./generated/ ./rotr.proto
 // protoc -I=. --grpc_out=./generated --plugin=protoc-gen-grpc=`which grpc_cpp_plugin` rotr.proto
@@ -76,4 +78,9 @@ message RequestVoteResponse {
 service RaftInternalRPC {
     rpc AppendEntries (AppendEntriesRequest) returns (AppendEntriesResponse) {};
     rpc RequestVote (RequestVoteRequest) returns (RequestVoteResponse) {};
+}
+
+service ClusterService {
+    rpc RegisterNode (NodeInfo) returns (ClusterInfo) {}
+    rpc DiscoverClusterById (google.protobuf.StringValue) returns (ClusterInfo) {}
 }

@@ -7,11 +7,18 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
 namespace rotr {
     class Configuration {
+    private:
+        string _clusterId;
+        string _dataDirPath;
+        string _port;
+        string _ip;
+        vector <pair<string, string>> _seeds;
     public:
         Configuration(int argc, char* argv[]);
         Configuration(const Configuration &) = delete;
@@ -19,10 +26,17 @@ namespace rotr {
         Configuration(Configuration &&) = delete;
         Configuration &operator=(Configuration &&) = delete;
 
-        string dataDirPath;
-        string port;
-        string ip;
-        vector<pair<string, string>> seeds;
+        string clusterId() { return _clusterId; }
+        string ip() { return _ip; }
+        string port() { return _port; }
+        string dataLocation() { return _dataDirPath; }
+
+        bool isCurrentNodeSeed() {
+            return _seeds.end() != find_if(_seeds.begin(), _seeds.end(),
+                                           [&](pair <string, string> p) {
+                                               return p.first == _ip && p.second == _port;
+                                           });
+        }
     };
 }
 

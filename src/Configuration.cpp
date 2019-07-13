@@ -22,10 +22,12 @@ rotr::Configuration::Configuration(int argc, char **argv) {
     opt->addUsage("--start-at\t\t\t\tip:port based address to start this broker at");
     opt->addUsage("--seeds\t\t\t\t\tComma separated list of ip:port combination for network discovery");
     opt->addUsage("--data-dir-path \t\tData storage location");
+    opt->addUsage("--cluster-id \t\tData storage location");
 
     opt->setOption("start-at");
     opt->setOption("seeds");
     opt->setOption("data-dir-path");
+    opt->setOption("cluster-id");
 
     opt->processCommandArgs(argc, argv);
 
@@ -36,9 +38,10 @@ rotr::Configuration::Configuration(int argc, char **argv) {
 
     vector<string> localAddr;
     Utils::tokenize(opt->getValue("start-at"), ":", localAddr);
-    ip = localAddr[0];
-    port = localAddr[1];
-    dataDirPath = opt->getValue("data-dir-path");
+    _ip = localAddr[0];
+    _port = localAddr[1];
+    _dataDirPath = opt->getValue("data-dir-path");
+    _clusterId = opt->getValue("cluster-id");
 
     vector<string> seedsAddrs;
     Utils::tokenize(opt->getValue("seeds"), ",", seedsAddrs);
@@ -48,7 +51,7 @@ rotr::Configuration::Configuration(int argc, char **argv) {
         Utils::tokenize(sa, ":", addr);
         p.first = addr[0];
         p.second = addr[1];
-        seeds.push_back(p);
+        _seeds.push_back(p);
     }
 
     logger->info("Node be reachable at : {}", opt->getValue("start-at"));

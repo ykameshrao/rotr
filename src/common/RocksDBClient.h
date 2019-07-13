@@ -19,10 +19,11 @@ namespace rotr::common {
         RocksDBClient();
         RocksDBClient(const string& dbP);
         RocksDBClient(const string& dbP, const vector<string>& columnFamilies);
+        RocksDBClient(const string& dbP, const vector<string>& columnFamilies, bool fifoCompaction, unordered_map<string, uint64_t> ttls);
         ~RocksDBClient();
 
-        void open(const string& dbP);
-        void openWithCF(const string& dbP, const vector<string>& columnFamilies);
+        void open(const string& dbP, bool fifoCompaction = false, uint64_t ttl = 0);
+        void openWithCF(const string& dbP, const vector<string>& columnFamilies, bool fifoCompaction = false, unordered_map<string, uint64_t> ttls = {});
         void put(const string& k, const string& v);
         void get(const string& k, string& v);
         void del(const string& k);

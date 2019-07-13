@@ -338,38 +338,44 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\nrotr.proto\022\004rotr\"\?\n\006Status\022$\n\nstatusCo"
-      "de\030\001 \001(\0162\020.rotr.StatusCode\022\017\n\007message\030\002 "
-      "\001(\t\"k\n\010NodeInfo\022\023\n\013ipV4Address\030\001 \001(\t\022\020\n\010"
-      "hostName\030\002 \001(\t\022\020\n\010isLeader\030\003 \001(\010\022\021\n\tclus"
-      "terId\030\004 \001(\t\022\023\n\013clusterName\030\005 \001(\t\"t\n\013Clus"
-      "terInfo\022\023\n\013clusterName\030\001 \001(\t\022\021\n\tclusterI"
-      "d\030\002 \001(\t\022\035\n\005nodes\030\003 \003(\0132\016.rotr.NodeInfo\022\036"
-      "\n\006leader\030\005 \001(\0132\016.rotr.NodeInfo\"-\n\014NodeIn"
-      "foList\022\035\n\005nodes\030\001 \003(\0132\016.rotr.NodeInfo\"\370\001"
-      "\n\024AppendEntriesRequest\022\014\n\004term\030\001 \001(\r\022\"\n\n"
-      "leaderNode\030\002 \001(\0132\016.rotr.NodeInfo\022\024\n\014prev"
-      "LogIndex\030\003 \001(\r\022\023\n\013prevLogTerm\030\004 \001(\r\022\031\n\021l"
-      "eaderCommitIndex\030\005 \001(\r\0228\n\007entries\030\006 \003(\0132"
-      "\'.rotr.AppendEntriesRequest.EntriesEntry"
-      "\032.\n\014EntriesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002"
-      " \001(\t:\0028\001\"t\n\022RequestVoteRequest\022\014\n\004term\030\001"
-      " \001(\r\022%\n\rcandidateNode\030\002 \001(\0132\016.rotr.NodeI"
-      "nfo\022\024\n\014lastLogIndex\030\003 \001(\r\022\023\n\013lastLogTerm"
-      "\030\004 \001(\r\"=\n\025AppendEntriesResponse\022\023\n\013curre"
-      "ntTerm\030\001 \001(\r\022\017\n\007success\030\002 \001(\010\"8\n\023Request"
-      "VoteResponse\022\014\n\004term\030\001 \001(\r\022\023\n\013voteGrante"
-      "d\030\002 \001(\010*0\n\nStatusCode\022\010\n\004None\020\000\022\013\n\007Failu"
-      "re\020\001\022\013\n\007Success\020\0022\243\001\n\017RaftInternalRPC\022J\n"
-      "\rAppendEntries\022\032.rotr.AppendEntriesReque"
-      "st\032\033.rotr.AppendEntriesResponse\"\000\022D\n\013Req"
-      "uestVote\022\030.rotr.RequestVoteRequest\032\031.rot"
-      "r.RequestVoteResponse\"\000B\006\n\004rotrb\006proto3"
+      "\n\nrotr.proto\022\004rotr\032\036google/protobuf/wrap"
+      "pers.proto\"\?\n\006Status\022$\n\nstatusCode\030\001 \001(\016"
+      "2\020.rotr.StatusCode\022\017\n\007message\030\002 \001(\t\"k\n\010N"
+      "odeInfo\022\023\n\013ipV4Address\030\001 \001(\t\022\020\n\010hostName"
+      "\030\002 \001(\t\022\020\n\010isLeader\030\003 \001(\010\022\021\n\tclusterId\030\004 "
+      "\001(\t\022\023\n\013clusterName\030\005 \001(\t\"t\n\013ClusterInfo\022"
+      "\023\n\013clusterName\030\001 \001(\t\022\021\n\tclusterId\030\002 \001(\t\022"
+      "\035\n\005nodes\030\003 \003(\0132\016.rotr.NodeInfo\022\036\n\006leader"
+      "\030\005 \001(\0132\016.rotr.NodeInfo\"-\n\014NodeInfoList\022\035"
+      "\n\005nodes\030\001 \003(\0132\016.rotr.NodeInfo\"\370\001\n\024Append"
+      "EntriesRequest\022\014\n\004term\030\001 \001(\r\022\"\n\nleaderNo"
+      "de\030\002 \001(\0132\016.rotr.NodeInfo\022\024\n\014prevLogIndex"
+      "\030\003 \001(\r\022\023\n\013prevLogTerm\030\004 \001(\r\022\031\n\021leaderCom"
+      "mitIndex\030\005 \001(\r\0228\n\007entries\030\006 \003(\0132\'.rotr.A"
+      "ppendEntriesRequest.EntriesEntry\032.\n\014Entr"
+      "iesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001"
+      "\"t\n\022RequestVoteRequest\022\014\n\004term\030\001 \001(\r\022%\n\r"
+      "candidateNode\030\002 \001(\0132\016.rotr.NodeInfo\022\024\n\014l"
+      "astLogIndex\030\003 \001(\r\022\023\n\013lastLogTerm\030\004 \001(\r\"="
+      "\n\025AppendEntriesResponse\022\023\n\013currentTerm\030\001"
+      " \001(\r\022\017\n\007success\030\002 \001(\010\"8\n\023RequestVoteResp"
+      "onse\022\014\n\004term\030\001 \001(\r\022\023\n\013voteGranted\030\002 \001(\010*"
+      "0\n\nStatusCode\022\010\n\004None\020\000\022\013\n\007Failure\020\001\022\013\n\007"
+      "Success\020\0022\243\001\n\017RaftInternalRPC\022J\n\rAppendE"
+      "ntries\022\032.rotr.AppendEntriesRequest\032\033.rot"
+      "r.AppendEntriesResponse\"\000\022D\n\013RequestVote"
+      "\022\030.rotr.RequestVoteRequest\032\031.rotr.Reques"
+      "tVoteResponse\"\0002\217\001\n\016ClusterService\0223\n\014Re"
+      "gisterNode\022\016.rotr.NodeInfo\032\021.rotr.Cluste"
+      "rInfo\"\000\022H\n\023DiscoverClusterById\022\034.google."
+      "protobuf.StringValue\032\021.rotr.ClusterInfo\""
+      "\000B\006\n\004rotrb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1079);
+      descriptor, 1257);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "rotr.proto", &protobuf_RegisterTypes);
+  ::protobuf_google_2fprotobuf_2fwrappers_2eproto::AddDescriptors();
 }
 
 void AddDescriptors() {

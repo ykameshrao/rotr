@@ -251,6 +251,230 @@ class RaftInternalRPC final {
   typedef WithStreamedUnaryMethod_AppendEntries<WithStreamedUnaryMethod_RequestVote<Service > > StreamedService;
 };
 
+class ClusterService final {
+ public:
+  static constexpr char const* service_full_name() {
+    return "rotr.ClusterService";
+  }
+  class StubInterface {
+   public:
+    virtual ~StubInterface() {}
+    virtual ::grpc::Status RegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::rotr::ClusterInfo* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>> AsyncRegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>>(AsyncRegisterNodeRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>> PrepareAsyncRegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>>(PrepareAsyncRegisterNodeRaw(context, request, cq));
+    }
+    virtual ::grpc::Status DiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::rotr::ClusterInfo* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>> AsyncDiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>>(AsyncDiscoverClusterByIdRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>> PrepareAsyncDiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>>(PrepareAsyncDiscoverClusterByIdRaw(context, request, cq));
+    }
+  private:
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>* AsyncRegisterNodeRaw(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>* PrepareAsyncRegisterNodeRaw(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>* AsyncDiscoverClusterByIdRaw(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>* PrepareAsyncDiscoverClusterByIdRaw(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) = 0;
+  };
+  class Stub final : public StubInterface {
+   public:
+    Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
+    ::grpc::Status RegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::rotr::ClusterInfo* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>> AsyncRegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>>(AsyncRegisterNodeRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>> PrepareAsyncRegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>>(PrepareAsyncRegisterNodeRaw(context, request, cq));
+    }
+    ::grpc::Status DiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::rotr::ClusterInfo* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>> AsyncDiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>>(AsyncDiscoverClusterByIdRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>> PrepareAsyncDiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>>(PrepareAsyncDiscoverClusterByIdRaw(context, request, cq));
+    }
+
+   private:
+    std::shared_ptr< ::grpc::ChannelInterface> channel_;
+    ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* AsyncRegisterNodeRaw(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* PrepareAsyncRegisterNodeRaw(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* AsyncDiscoverClusterByIdRaw(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* PrepareAsyncDiscoverClusterByIdRaw(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_RegisterNode_;
+    const ::grpc::internal::RpcMethod rpcmethod_DiscoverClusterById_;
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+
+  class Service : public ::grpc::Service {
+   public:
+    Service();
+    virtual ~Service();
+    virtual ::grpc::Status RegisterNode(::grpc::ServerContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response);
+    virtual ::grpc::Status DiscoverClusterById(::grpc::ServerContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response);
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_RegisterNode : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_RegisterNode() {
+      ::grpc::Service::MarkMethodAsync(0);
+    }
+    ~WithAsyncMethod_RegisterNode() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RegisterNode(::grpc::ServerContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRegisterNode(::grpc::ServerContext* context, ::rotr::NodeInfo* request, ::grpc::ServerAsyncResponseWriter< ::rotr::ClusterInfo>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_DiscoverClusterById : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_DiscoverClusterById() {
+      ::grpc::Service::MarkMethodAsync(1);
+    }
+    ~WithAsyncMethod_DiscoverClusterById() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestDiscoverClusterById(::grpc::ServerContext* context, ::google::protobuf::StringValue* request, ::grpc::ServerAsyncResponseWriter< ::rotr::ClusterInfo>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_RegisterNode<WithAsyncMethod_DiscoverClusterById<Service > > AsyncService;
+  template <class BaseClass>
+  class WithGenericMethod_RegisterNode : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_RegisterNode() {
+      ::grpc::Service::MarkMethodGeneric(0);
+    }
+    ~WithGenericMethod_RegisterNode() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RegisterNode(::grpc::ServerContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_DiscoverClusterById : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_DiscoverClusterById() {
+      ::grpc::Service::MarkMethodGeneric(1);
+    }
+    ~WithGenericMethod_DiscoverClusterById() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_RegisterNode : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_RegisterNode() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_RegisterNode() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RegisterNode(::grpc::ServerContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRegisterNode(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_DiscoverClusterById : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_DiscoverClusterById() {
+      ::grpc::Service::MarkMethodRaw(1);
+    }
+    ~WithRawMethod_DiscoverClusterById() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestDiscoverClusterById(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_RegisterNode : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_RegisterNode() {
+      ::grpc::Service::MarkMethodStreamed(0,
+        new ::grpc::internal::StreamedUnaryHandler< ::rotr::NodeInfo, ::rotr::ClusterInfo>(std::bind(&WithStreamedUnaryMethod_RegisterNode<BaseClass>::StreamedRegisterNode, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_RegisterNode() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status RegisterNode(::grpc::ServerContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedRegisterNode(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::rotr::NodeInfo,::rotr::ClusterInfo>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_DiscoverClusterById : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_DiscoverClusterById() {
+      ::grpc::Service::MarkMethodStreamed(1,
+        new ::grpc::internal::StreamedUnaryHandler< ::google::protobuf::StringValue, ::rotr::ClusterInfo>(std::bind(&WithStreamedUnaryMethod_DiscoverClusterById<BaseClass>::StreamedDiscoverClusterById, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_DiscoverClusterById() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedDiscoverClusterById(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::google::protobuf::StringValue,::rotr::ClusterInfo>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_RegisterNode<WithStreamedUnaryMethod_DiscoverClusterById<Service > > StreamedUnaryService;
+  typedef Service SplitStreamedService;
+  typedef WithStreamedUnaryMethod_RegisterNode<WithStreamedUnaryMethod_DiscoverClusterById<Service > > StreamedService;
+};
+
 }  // namespace rotr
 
 
