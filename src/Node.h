@@ -12,11 +12,11 @@ namespace rotr {
         };
 
     private:
-        State nodeState_;
+        State _nodeState;
 
     public:
         Node() {
-            nodeState_ = CANDIDATE;
+            _nodeState = CANDIDATE;
         }
 
         ~Node() {
@@ -28,7 +28,7 @@ namespace rotr {
         Node &operator=(Node &&) = delete;
 
         State nodeState() {
-            return nodeState_;
+            return _nodeState;
         }
     };
 }

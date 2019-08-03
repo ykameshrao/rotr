@@ -20,12 +20,10 @@ rotr::Configuration::Configuration(int argc, char **argv) {
     opt->addUsage("Usage: ");
     opt->addUsage("");
     opt->addUsage("--start-at\t\t\t\tip:port based address to start this broker at");
-    opt->addUsage("--seeds\t\t\t\t\tComma separated list of ip:port combination for network discovery");
     opt->addUsage("--data-dir-path \t\tData storage location");
     opt->addUsage("--cluster-id \t\t\tUser defined identifier for the cluster");
 
     opt->setOption("start-at");
-    opt->setOption("seeds");
     opt->setOption("data-dir-path");
     opt->setOption("cluster-id");
 
@@ -43,17 +41,7 @@ rotr::Configuration::Configuration(int argc, char **argv) {
     _dataDirPath = opt->getValue("data-dir-path");
     _clusterId = opt->getValue("cluster-id");
 
-    vector<string> seedsAddrs;
-    Utils::tokenize(opt->getValue("seeds"), ",", seedsAddrs);
-    for (string sa : seedsAddrs) {
-        vector<string> addr;
-        pair<string, string> p;
-        Utils::tokenize(sa, ":", addr);
-        p.first = addr[0];
-        p.second = addr[1];
-        _seeds.push_back(p);
-    }
-
     logger->info("Node be reachable at : {}", opt->getValue("start-at"));
-    logger->info("Cluster seeds at     : {}", opt->getValue("seeds"));
+    logger->info("Node data dir at : {}", opt->getValue("data-dir-path"));
+    logger->info("ClusterId : {}", opt->getValue("cluster-id"));
 }
