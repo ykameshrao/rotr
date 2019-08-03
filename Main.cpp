@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
                  "                                                                            \n"
                  "                                                                            ");
 
-    //--start-at 0.0.0.0:50051 --seeds 0.0.0.0:50051,0.0.0.0:50052 --data-dir-path /tmp/rotr
+    //--start-at 0.0.0.0:50051 --seeds 0.0.0.0:50051,0.0.0.0:50052 --data-dir-path /tmp/rotr --cluster-id Local
     unique_ptr<Configuration> configuration = make_unique<Configuration>(argc, argv);
 
     stringstream serverAddress;

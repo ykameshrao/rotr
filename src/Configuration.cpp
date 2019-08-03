@@ -22,7 +22,7 @@ rotr::Configuration::Configuration(int argc, char **argv) {
     opt->addUsage("--start-at\t\t\t\tip:port based address to start this broker at");
     opt->addUsage("--seeds\t\t\t\t\tComma separated list of ip:port combination for network discovery");
     opt->addUsage("--data-dir-path \t\tData storage location");
-    opt->addUsage("--cluster-id \t\tData storage location");
+    opt->addUsage("--cluster-id \t\t\tUser defined identifier for the cluster");
 
     opt->setOption("start-at");
     opt->setOption("seeds");
