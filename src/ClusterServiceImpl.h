@@ -17,7 +17,7 @@ namespace rotr {
     public:
         ClusterServiceImpl(unique_ptr<ClusterHandler> handler) : _clusterHandler{move(handler)} {}
 
-        grpc::Status RegisterNode(::grpc::ServerContext *context, const ::rotr::BrokerInfo *request,
+        grpc::Status RegisterNode(::grpc::ServerContext *context, const ::rotr::NodeInfo *request,
                                   ::rotr::ClusterInfo *response) override;
 
         grpc::Status DiscoverClusterById(::grpc::ServerContext *context, const ::google::protobuf::StringValue *request,
@@ -25,4 +25,4 @@ namespace rotr {
     };
 }
 
-#endif //KNOWHERE_CLUSTERSERVICEIMPL_H
+#endif //ROTR_CLUSTERSERVICEIMPL_H

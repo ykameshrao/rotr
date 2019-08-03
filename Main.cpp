@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
     unique_ptr<Configuration> configuration = make_unique<Configuration>(argc, argv);
 
     stringstream serverAddress;
-    serverAddress << configuration->ip << ":" << configuration->port;
+    serverAddress << configuration->ip() << ":" << configuration->port();
     RaftInternalRPCServiceImpl raftInternalRpcService;
 
     grpc::ServerBuilder builder;
@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
     builder.RegisterService(&raftInternalRpcService);
     unique_ptr<grpc::Server> server(builder.BuildAndStart());
 
-    logger->info("Node listening on port {}...", configuration->ip);
+    logger->info("Node listening on port {}...", configuration->ip());
     server->Wait();
     return 0;
 }

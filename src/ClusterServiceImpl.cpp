@@ -5,7 +5,7 @@
 #include "ClusterServiceImpl.h"
 
 grpc::Status rotr::ClusterServiceImpl::RegisterNode(::grpc::ServerContext *context,
-                                                                const ::rotr::BrokerInfo *request,
+                                                                const ::rotr::NodeInfo *request,
                                                                 ::rotr::ClusterInfo *response) {
     return Service::RegisterNode(context, request, response);
 }

@@ -60,11 +60,11 @@ vector<pair<string, string>> &&rotr::ClusterHandler::getDeserializedNodeList(con
     else {
         vector<pair<string, string>> result;
         vector<string> allNodeAddrs;
-        Utils::I().tokenize(response, ",", allNodeAddrs);
+        Utils::tokenize(response, ",", allNodeAddrs);
         for (string na : allNodeAddrs) {
             vector<string> addr;
             pair<string, string> p;
-            Utils::I().tokenize(na, ":", addr);
+            Utils::tokenize(na, ":", addr);
             p.first = addr[0];
             p.second = addr[1];
             result.push_back(p);
