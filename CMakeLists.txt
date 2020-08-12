@@ -18,17 +18,26 @@ else()
 endif()
 
 # Find Protobuf installation
-find_package(Protobuf REQUIRED)
+find_package(protobuf CONFIG REQUIRED)
+find_package(gRPC CONFIG REQUIRED)
+find_package(RocksDB CONFIG REQUIRED)
+find_package(yaml-cpp CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
 
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
 
-link_libraries(grpc++_unsecure grpc gpr pthread ${PROTOBUF_LIBRARY} rocksdb)
+target_link_libraries(main PRIVATE pthread)
+target_link_libraries(main PRIVATE protobuf::libprotoc protobuf::libprotobuf protobuf::libprotobuf-lite)
+target_link_libraries(main PRIVATE gRPC::gpr gRPC::grpc gRPC::grpc++ gRPC::grpc++_alts)
+target_link_libraries(main PRIVATE RocksDB::rocksdb RocksDB::rocksdb-shared)
+target_link_libraries(main PRIVATE yaml-cpp)
+target_link_libraries(main PRIVATE spdlog::spdlog spdlog::spdlog_header_only)
 
 file(GLOB_RECURSE SOURCE_FILES "src/**")
 file(GLOB_RECURSE COMMON_SOURCE_FILES "src/common/**")
 file(GLOB_RECURSE PBF_SOURCE_FILES "src/proto/**")
-set(SOURCE ${SOURCE_FILES} ${COMMON_SOURCE_FILES} ${PBF_SOURCE_FILES} Main.cpp src/Node.cpp src/Node.h)
+set(SOURCE ${SOURCE_FILES} ${COMMON_SOURCE_FILES} ${PBF_SOURCE_FILES} Main.cpp)
 
 set(MODULE_NAME "rotr")
 add_executable(${MODULE_NAME} ${SOURCE})
@@ -60,3 +69,12 @@ add_executable(${MODULE_NAME} ${SOURCE})
 # Install folly, dependencies - https://github.com/facebook/folly
 # Install fizz - https://github.com/facebookincubator/fizz
 # Install wangle - https://github.com/facebook/wangle
+#The package libevent:x64-linux provides CMake targets:
+#
+#    find_package(Libevent CONFIG REQUIRED)
+#    target_link_libraries(main PRIVATE libevent::core libevent::extra libevent::pthreads)
+#
+#The package libuv:x64-linux provides CMake targets:
+#
+#    find_package(unofficial-libuv CONFIG REQUIRED)
+#    target_link_libraries(main PRIVATE unofficial::libuv::libuv)

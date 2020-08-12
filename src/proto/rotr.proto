@@ -25,7 +25,6 @@ message Status {
     string message = 2;
 }
 
-
 message NodeInfo {
     string ipV4Address = 1;
     string hostName = 2;
@@ -40,7 +39,6 @@ message ClusterInfo {
     repeated NodeInfo nodes = 3;
     NodeInfo leader = 5;
 }
-
 
 message NodeInfoList {
     repeated NodeInfo nodes = 1;
