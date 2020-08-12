@@ -5,12 +5,18 @@
 #include "rotr.pb.h"
 #include "rotr.grpc.pb.h"
 
+#include <functional>
 #include <grpcpp/impl/codegen/async_stream.h>
 #include <grpcpp/impl/codegen/async_unary_call.h>
 #include <grpcpp/impl/codegen/channel_interface.h>
 #include <grpcpp/impl/codegen/client_unary_call.h>
-#include <grpcpp/impl/codegen/method_handler_impl.h>
+#include <grpcpp/impl/codegen/client_callback.h>
+#include <grpcpp/impl/codegen/message_allocator.h>
+#include <grpcpp/impl/codegen/method_handler.h>
 #include <grpcpp/impl/codegen/rpc_service_method.h>
+#include <grpcpp/impl/codegen/server_callback.h>
+#include <grpcpp/impl/codegen/server_callback_handlers.h>
+#include <grpcpp/impl/codegen/server_context.h>
 #include <grpcpp/impl/codegen/service_type.h>
 #include <grpcpp/impl/codegen/sync_stream.h>
 namespace rotr {
@@ -35,24 +41,56 @@ RaftInternalRPC::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& ch
   return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_AppendEntries_, context, request, response);
 }
 
+void RaftInternalRPC::Stub::experimental_async::AppendEntries(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_AppendEntries_, context, request, response, std::move(f));
+}
+
+void RaftInternalRPC::Stub::experimental_async::AppendEntries(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::AppendEntriesResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_AppendEntries_, context, request, response, std::move(f));
+}
+
+void RaftInternalRPC::Stub::experimental_async::AppendEntries(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_AppendEntries_, context, request, response, reactor);
+}
+
+void RaftInternalRPC::Stub::experimental_async::AppendEntries(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::AppendEntriesResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_AppendEntries_, context, request, response, reactor);
+}
+
 ::grpc::ClientAsyncResponseReader< ::rotr::AppendEntriesResponse>* RaftInternalRPC::Stub::AsyncAppendEntriesRaw(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::rotr::AppendEntriesResponse>::Create(channel_.get(), cq, rpcmethod_AppendEntries_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::AppendEntriesResponse>::Create(channel_.get(), cq, rpcmethod_AppendEntries_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::rotr::AppendEntriesResponse>* RaftInternalRPC::Stub::PrepareAsyncAppendEntriesRaw(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::rotr::AppendEntriesResponse>::Create(channel_.get(), cq, rpcmethod_AppendEntries_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::AppendEntriesResponse>::Create(channel_.get(), cq, rpcmethod_AppendEntries_, context, request, false);
 }
 
 ::grpc::Status RaftInternalRPC::Stub::RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest& request, ::rotr::RequestVoteResponse* response) {
   return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_RequestVote_, context, request, response);
 }
 
+void RaftInternalRPC::Stub::experimental_async::RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_RequestVote_, context, request, response, std::move(f));
+}
+
+void RaftInternalRPC::Stub::experimental_async::RequestVote(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::RequestVoteResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_RequestVote_, context, request, response, std::move(f));
+}
+
+void RaftInternalRPC::Stub::experimental_async::RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_RequestVote_, context, request, response, reactor);
+}
+
+void RaftInternalRPC::Stub::experimental_async::RequestVote(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::RequestVoteResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_RequestVote_, context, request, response, reactor);
+}
+
 ::grpc::ClientAsyncResponseReader< ::rotr::RequestVoteResponse>* RaftInternalRPC::Stub::AsyncRequestVoteRaw(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::rotr::RequestVoteResponse>::Create(channel_.get(), cq, rpcmethod_RequestVote_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::RequestVoteResponse>::Create(channel_.get(), cq, rpcmethod_RequestVote_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::rotr::RequestVoteResponse>* RaftInternalRPC::Stub::PrepareAsyncRequestVoteRaw(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::rotr::RequestVoteResponse>::Create(channel_.get(), cq, rpcmethod_RequestVote_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::RequestVoteResponse>::Create(channel_.get(), cq, rpcmethod_RequestVote_, context, request, false);
 }
 
 RaftInternalRPC::Service::Service() {
@@ -60,12 +98,22 @@ RaftInternalRPC::Service::Service() {
       RaftInternalRPC_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< RaftInternalRPC::Service, ::rotr::AppendEntriesRequest, ::rotr::AppendEntriesResponse>(
-          std::mem_fn(&RaftInternalRPC::Service::AppendEntries), this)));
+          [](RaftInternalRPC::Service* service,
+             ::grpc_impl::ServerContext* ctx,
+             const ::rotr::AppendEntriesRequest* req,
+             ::rotr::AppendEntriesResponse* resp) {
+               return service->AppendEntries(ctx, req, resp);
+             }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       RaftInternalRPC_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< RaftInternalRPC::Service, ::rotr::RequestVoteRequest, ::rotr::RequestVoteResponse>(
-          std::mem_fn(&RaftInternalRPC::Service::RequestVote), this)));
+          [](RaftInternalRPC::Service* service,
+             ::grpc_impl::ServerContext* ctx,
+             const ::rotr::RequestVoteRequest* req,
+             ::rotr::RequestVoteResponse* resp) {
+               return service->RequestVote(ctx, req, resp);
+             }, this)));
 }
 
 RaftInternalRPC::Service::~Service() {
@@ -106,24 +154,56 @@ ClusterService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& cha
   return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_RegisterNode_, context, request, response);
 }
 
+void ClusterService::Stub::experimental_async::RegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_RegisterNode_, context, request, response, std::move(f));
+}
+
+void ClusterService::Stub::experimental_async::RegisterNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_RegisterNode_, context, request, response, std::move(f));
+}
+
+void ClusterService::Stub::experimental_async::RegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_RegisterNode_, context, request, response, reactor);
+}
+
+void ClusterService::Stub::experimental_async::RegisterNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_RegisterNode_, context, request, response, reactor);
+}
+
 ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* ClusterService::Stub::AsyncRegisterNodeRaw(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::rotr::ClusterInfo>::Create(channel_.get(), cq, rpcmethod_RegisterNode_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::ClusterInfo>::Create(channel_.get(), cq, rpcmethod_RegisterNode_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* ClusterService::Stub::PrepareAsyncRegisterNodeRaw(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::rotr::ClusterInfo>::Create(channel_.get(), cq, rpcmethod_RegisterNode_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::ClusterInfo>::Create(channel_.get(), cq, rpcmethod_RegisterNode_, context, request, false);
 }
 
 ::grpc::Status ClusterService::Stub::DiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::rotr::ClusterInfo* response) {
   return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_DiscoverClusterById_, context, request, response);
 }
 
+void ClusterService::Stub::experimental_async::DiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_DiscoverClusterById_, context, request, response, std::move(f));
+}
+
+void ClusterService::Stub::experimental_async::DiscoverClusterById(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_DiscoverClusterById_, context, request, response, std::move(f));
+}
+
+void ClusterService::Stub::experimental_async::DiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_DiscoverClusterById_, context, request, response, reactor);
+}
+
+void ClusterService::Stub::experimental_async::DiscoverClusterById(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_DiscoverClusterById_, context, request, response, reactor);
+}
+
 ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* ClusterService::Stub::AsyncDiscoverClusterByIdRaw(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::rotr::ClusterInfo>::Create(channel_.get(), cq, rpcmethod_DiscoverClusterById_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::ClusterInfo>::Create(channel_.get(), cq, rpcmethod_DiscoverClusterById_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* ClusterService::Stub::PrepareAsyncDiscoverClusterByIdRaw(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::rotr::ClusterInfo>::Create(channel_.get(), cq, rpcmethod_DiscoverClusterById_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::ClusterInfo>::Create(channel_.get(), cq, rpcmethod_DiscoverClusterById_, context, request, false);
 }
 
 ClusterService::Service::Service() {
@@ -131,12 +211,22 @@ ClusterService::Service::Service() {
       ClusterService_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< ClusterService::Service, ::rotr::NodeInfo, ::rotr::ClusterInfo>(
-          std::mem_fn(&ClusterService::Service::RegisterNode), this)));
+          [](ClusterService::Service* service,
+             ::grpc_impl::ServerContext* ctx,
+             const ::rotr::NodeInfo* req,
+             ::rotr::ClusterInfo* resp) {
+               return service->RegisterNode(ctx, req, resp);
+             }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       ClusterService_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< ClusterService::Service, ::google::protobuf::StringValue, ::rotr::ClusterInfo>(
-          std::mem_fn(&ClusterService::Service::DiscoverClusterById), this)));
+          [](ClusterService::Service* service,
+             ::grpc_impl::ServerContext* ctx,
+             const ::google::protobuf::StringValue* req,
+             ::rotr::ClusterInfo* resp) {
+               return service->DiscoverClusterById(ctx, req, resp);
+             }, this)));
 }
 
 ClusterService::Service::~Service() {

@@ -2,6 +2,7 @@
 rotr is the C++14 Raft consensus protocol implementation using RocksDB as storage solution.
 
 #### Code Setup:
+Install the following
 
     # install vcpkg package manager on your system using the official instructions
     git clone https://github.com/Microsoft/vcpkg.git
@@ -16,6 +17,8 @@ rotr is the C++14 Raft consensus protocol implementation using RocksDB as storag
     vcpkg install spdlog
     
     CMake projects should use: "-DCMAKE_TOOLCHAIN_FILE=/home/<user-name>/vcpkg/scripts/buildsystems/vcpkg.cmake"
+
+Then install protocol buffers from: https://github.com/protocolbuffers/protobuf/blob/master/src/README.md
 
 ##### How to use VCPKG with CLion
 - VCPKG provides a .cmake file to be used during configuration process, so that CMake can correctly recognize the needed libraries' paths. A good advice of its usage with CLion's cmake was found here ( https://github.com/Microsoft/vcpkg/issues/3572 ):

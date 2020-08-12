@@ -6,23 +6,25 @@
 
 #include "rotr.pb.h"
 
+#include <functional>
+#include <grpc/impl/codegen/port_platform.h>
 #include <grpcpp/impl/codegen/async_generic_service.h>
 #include <grpcpp/impl/codegen/async_stream.h>
 #include <grpcpp/impl/codegen/async_unary_call.h>
-#include <grpcpp/impl/codegen/method_handler_impl.h>
+#include <grpcpp/impl/codegen/client_callback.h>
+#include <grpcpp/impl/codegen/client_context.h>
+#include <grpcpp/impl/codegen/completion_queue.h>
+#include <grpcpp/impl/codegen/message_allocator.h>
+#include <grpcpp/impl/codegen/method_handler.h>
 #include <grpcpp/impl/codegen/proto_utils.h>
 #include <grpcpp/impl/codegen/rpc_method.h>
+#include <grpcpp/impl/codegen/server_callback.h>
+#include <grpcpp/impl/codegen/server_callback_handlers.h>
+#include <grpcpp/impl/codegen/server_context.h>
 #include <grpcpp/impl/codegen/service_type.h>
 #include <grpcpp/impl/codegen/status.h>
 #include <grpcpp/impl/codegen/stub_options.h>
 #include <grpcpp/impl/codegen/sync_stream.h>
-
-namespace grpc {
-class CompletionQueue;
-class Channel;
-class ServerCompletionQueue;
-class ServerContext;
-}  // namespace grpc
 
 namespace rotr {
 
@@ -49,6 +51,41 @@ class RaftInternalRPC final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::rotr::RequestVoteResponse>> PrepareAsyncRequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::rotr::RequestVoteResponse>>(PrepareAsyncRequestVoteRaw(context, request, cq));
     }
+    class experimental_async_interface {
+     public:
+      virtual ~experimental_async_interface() {}
+      virtual void AppendEntries(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void AppendEntries(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::AppendEntriesResponse* response, std::function<void(::grpc::Status)>) = 0;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void AppendEntries(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void AppendEntries(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void AppendEntries(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::AppendEntriesResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void AppendEntries(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::AppendEntriesResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      virtual void RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void RequestVote(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::RequestVoteResponse* response, std::function<void(::grpc::Status)>) = 0;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void RequestVote(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::RequestVoteResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void RequestVote(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::RequestVoteResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+    };
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    typedef class experimental_async_interface async_interface;
+    #endif
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    async_interface* async() { return experimental_async(); }
+    #endif
+    virtual class experimental_async_interface* experimental_async() { return nullptr; }
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::rotr::AppendEntriesResponse>* AsyncAppendEntriesRaw(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::rotr::AppendEntriesResponse>* PrepareAsyncAppendEntriesRaw(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest& request, ::grpc::CompletionQueue* cq) = 0;
@@ -72,9 +109,44 @@ class RaftInternalRPC final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::rotr::RequestVoteResponse>> PrepareAsyncRequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::rotr::RequestVoteResponse>>(PrepareAsyncRequestVoteRaw(context, request, cq));
     }
+    class experimental_async final :
+      public StubInterface::experimental_async_interface {
+     public:
+      void AppendEntries(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response, std::function<void(::grpc::Status)>) override;
+      void AppendEntries(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::AppendEntriesResponse* response, std::function<void(::grpc::Status)>) override;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void AppendEntries(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void AppendEntries(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void AppendEntries(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::AppendEntriesResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void AppendEntries(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::AppendEntriesResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      void RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response, std::function<void(::grpc::Status)>) override;
+      void RequestVote(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::RequestVoteResponse* response, std::function<void(::grpc::Status)>) override;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void RequestVote(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void RequestVote(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::RequestVoteResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void RequestVote(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::RequestVoteResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+     private:
+      friend class Stub;
+      explicit experimental_async(Stub* stub): stub_(stub) { }
+      Stub* stub() { return stub_; }
+      Stub* stub_;
+    };
+    class experimental_async_interface* experimental_async() override { return &async_stub_; }
 
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
+    class experimental_async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::rotr::AppendEntriesResponse>* AsyncAppendEntriesRaw(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::rotr::AppendEntriesResponse>* PrepareAsyncAppendEntriesRaw(::grpc::ClientContext* context, const ::rotr::AppendEntriesRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::rotr::RequestVoteResponse>* AsyncRequestVoteRaw(::grpc::ClientContext* context, const ::rotr::RequestVoteRequest& request, ::grpc::CompletionQueue* cq) override;
@@ -94,7 +166,7 @@ class RaftInternalRPC final {
   template <class BaseClass>
   class WithAsyncMethod_AppendEntries : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_AppendEntries() {
       ::grpc::Service::MarkMethodAsync(0);
@@ -103,7 +175,7 @@ class RaftInternalRPC final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AppendEntries(::grpc::ServerContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response) override {
+    ::grpc::Status AppendEntries(::grpc::ServerContext* /*context*/, const ::rotr::AppendEntriesRequest* /*request*/, ::rotr::AppendEntriesResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -114,7 +186,7 @@ class RaftInternalRPC final {
   template <class BaseClass>
   class WithAsyncMethod_RequestVote : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_RequestVote() {
       ::grpc::Service::MarkMethodAsync(1);
@@ -123,7 +195,7 @@ class RaftInternalRPC final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RequestVote(::grpc::ServerContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response) override {
+    ::grpc::Status RequestVote(::grpc::ServerContext* /*context*/, const ::rotr::RequestVoteRequest* /*request*/, ::rotr::RequestVoteResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -133,9 +205,108 @@ class RaftInternalRPC final {
   };
   typedef WithAsyncMethod_AppendEntries<WithAsyncMethod_RequestVote<Service > > AsyncService;
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_AppendEntries : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_AppendEntries() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(0,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::rotr::AppendEntriesRequest, ::rotr::AppendEntriesResponse>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response) { return this->AppendEntries(context, request, response); }));}
+    void SetMessageAllocatorFor_AppendEntries(
+        ::grpc::experimental::MessageAllocator< ::rotr::AppendEntriesRequest, ::rotr::AppendEntriesResponse>* allocator) {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(0);
+    #endif
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::rotr::AppendEntriesRequest, ::rotr::AppendEntriesResponse>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~ExperimentalWithCallbackMethod_AppendEntries() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AppendEntries(::grpc::ServerContext* /*context*/, const ::rotr::AppendEntriesRequest* /*request*/, ::rotr::AppendEntriesResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* AppendEntries(
+      ::grpc::CallbackServerContext* /*context*/, const ::rotr::AppendEntriesRequest* /*request*/, ::rotr::AppendEntriesResponse* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* AppendEntries(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::rotr::AppendEntriesRequest* /*request*/, ::rotr::AppendEntriesResponse* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_RequestVote : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_RequestVote() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(1,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::rotr::RequestVoteRequest, ::rotr::RequestVoteResponse>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response) { return this->RequestVote(context, request, response); }));}
+    void SetMessageAllocatorFor_RequestVote(
+        ::grpc::experimental::MessageAllocator< ::rotr::RequestVoteRequest, ::rotr::RequestVoteResponse>* allocator) {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(1);
+    #endif
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::rotr::RequestVoteRequest, ::rotr::RequestVoteResponse>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~ExperimentalWithCallbackMethod_RequestVote() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RequestVote(::grpc::ServerContext* /*context*/, const ::rotr::RequestVoteRequest* /*request*/, ::rotr::RequestVoteResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* RequestVote(
+      ::grpc::CallbackServerContext* /*context*/, const ::rotr::RequestVoteRequest* /*request*/, ::rotr::RequestVoteResponse* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* RequestVote(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::rotr::RequestVoteRequest* /*request*/, ::rotr::RequestVoteResponse* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+  typedef ExperimentalWithCallbackMethod_AppendEntries<ExperimentalWithCallbackMethod_RequestVote<Service > > CallbackService;
+  #endif
+
+  typedef ExperimentalWithCallbackMethod_AppendEntries<ExperimentalWithCallbackMethod_RequestVote<Service > > ExperimentalCallbackService;
+  template <class BaseClass>
   class WithGenericMethod_AppendEntries : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_AppendEntries() {
       ::grpc::Service::MarkMethodGeneric(0);
@@ -144,7 +315,7 @@ class RaftInternalRPC final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AppendEntries(::grpc::ServerContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response) override {
+    ::grpc::Status AppendEntries(::grpc::ServerContext* /*context*/, const ::rotr::AppendEntriesRequest* /*request*/, ::rotr::AppendEntriesResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -152,7 +323,7 @@ class RaftInternalRPC final {
   template <class BaseClass>
   class WithGenericMethod_RequestVote : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_RequestVote() {
       ::grpc::Service::MarkMethodGeneric(1);
@@ -161,7 +332,7 @@ class RaftInternalRPC final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RequestVote(::grpc::ServerContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response) override {
+    ::grpc::Status RequestVote(::grpc::ServerContext* /*context*/, const ::rotr::RequestVoteRequest* /*request*/, ::rotr::RequestVoteResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -169,7 +340,7 @@ class RaftInternalRPC final {
   template <class BaseClass>
   class WithRawMethod_AppendEntries : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_AppendEntries() {
       ::grpc::Service::MarkMethodRaw(0);
@@ -178,7 +349,7 @@ class RaftInternalRPC final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AppendEntries(::grpc::ServerContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response) override {
+    ::grpc::Status AppendEntries(::grpc::ServerContext* /*context*/, const ::rotr::AppendEntriesRequest* /*request*/, ::rotr::AppendEntriesResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -189,7 +360,7 @@ class RaftInternalRPC final {
   template <class BaseClass>
   class WithRawMethod_RequestVote : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_RequestVote() {
       ::grpc::Service::MarkMethodRaw(1);
@@ -198,7 +369,7 @@ class RaftInternalRPC final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RequestVote(::grpc::ServerContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response) override {
+    ::grpc::Status RequestVote(::grpc::ServerContext* /*context*/, const ::rotr::RequestVoteRequest* /*request*/, ::rotr::RequestVoteResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -207,19 +378,102 @@ class RaftInternalRPC final {
     }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_AppendEntries : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_AppendEntries() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(0,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->AppendEntries(context, request, response); }));
+    }
+    ~ExperimentalWithRawCallbackMethod_AppendEntries() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AppendEntries(::grpc::ServerContext* /*context*/, const ::rotr::AppendEntriesRequest* /*request*/, ::rotr::AppendEntriesResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* AppendEntries(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* AppendEntries(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_RequestVote : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_RequestVote() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(1,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->RequestVote(context, request, response); }));
+    }
+    ~ExperimentalWithRawCallbackMethod_RequestVote() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RequestVote(::grpc::ServerContext* /*context*/, const ::rotr::RequestVoteRequest* /*request*/, ::rotr::RequestVoteResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* RequestVote(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* RequestVote(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_AppendEntries : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_AppendEntries() {
       ::grpc::Service::MarkMethodStreamed(0,
-        new ::grpc::internal::StreamedUnaryHandler< ::rotr::AppendEntriesRequest, ::rotr::AppendEntriesResponse>(std::bind(&WithStreamedUnaryMethod_AppendEntries<BaseClass>::StreamedAppendEntries, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::rotr::AppendEntriesRequest, ::rotr::AppendEntriesResponse>(
+            [this](::grpc_impl::ServerContext* context,
+                   ::grpc_impl::ServerUnaryStreamer<
+                     ::rotr::AppendEntriesRequest, ::rotr::AppendEntriesResponse>* streamer) {
+                       return this->StreamedAppendEntries(context,
+                         streamer);
+                  }));
     }
     ~WithStreamedUnaryMethod_AppendEntries() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status AppendEntries(::grpc::ServerContext* context, const ::rotr::AppendEntriesRequest* request, ::rotr::AppendEntriesResponse* response) override {
+    ::grpc::Status AppendEntries(::grpc::ServerContext* /*context*/, const ::rotr::AppendEntriesRequest* /*request*/, ::rotr::AppendEntriesResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -229,17 +483,24 @@ class RaftInternalRPC final {
   template <class BaseClass>
   class WithStreamedUnaryMethod_RequestVote : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_RequestVote() {
       ::grpc::Service::MarkMethodStreamed(1,
-        new ::grpc::internal::StreamedUnaryHandler< ::rotr::RequestVoteRequest, ::rotr::RequestVoteResponse>(std::bind(&WithStreamedUnaryMethod_RequestVote<BaseClass>::StreamedRequestVote, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::rotr::RequestVoteRequest, ::rotr::RequestVoteResponse>(
+            [this](::grpc_impl::ServerContext* context,
+                   ::grpc_impl::ServerUnaryStreamer<
+                     ::rotr::RequestVoteRequest, ::rotr::RequestVoteResponse>* streamer) {
+                       return this->StreamedRequestVote(context,
+                         streamer);
+                  }));
     }
     ~WithStreamedUnaryMethod_RequestVote() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status RequestVote(::grpc::ServerContext* context, const ::rotr::RequestVoteRequest* request, ::rotr::RequestVoteResponse* response) override {
+    ::grpc::Status RequestVote(::grpc::ServerContext* /*context*/, const ::rotr::RequestVoteRequest* /*request*/, ::rotr::RequestVoteResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -273,6 +534,41 @@ class ClusterService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>> PrepareAsyncDiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>>(PrepareAsyncDiscoverClusterByIdRaw(context, request, cq));
     }
+    class experimental_async_interface {
+     public:
+      virtual ~experimental_async_interface() {}
+      virtual void RegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void RegisterNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)>) = 0;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void RegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void RegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void RegisterNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void RegisterNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      virtual void DiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void DiscoverClusterById(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)>) = 0;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void DiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void DiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void DiscoverClusterById(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void DiscoverClusterById(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+    };
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    typedef class experimental_async_interface async_interface;
+    #endif
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    async_interface* async() { return experimental_async(); }
+    #endif
+    virtual class experimental_async_interface* experimental_async() { return nullptr; }
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>* AsyncRegisterNodeRaw(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::rotr::ClusterInfo>* PrepareAsyncRegisterNodeRaw(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) = 0;
@@ -296,9 +592,44 @@ class ClusterService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>> PrepareAsyncDiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>>(PrepareAsyncDiscoverClusterByIdRaw(context, request, cq));
     }
+    class experimental_async final :
+      public StubInterface::experimental_async_interface {
+     public:
+      void RegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)>) override;
+      void RegisterNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)>) override;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void RegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void RegisterNode(::grpc::ClientContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void RegisterNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void RegisterNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      void DiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)>) override;
+      void DiscoverClusterById(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)>) override;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void DiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void DiscoverClusterById(::grpc::ClientContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void DiscoverClusterById(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void DiscoverClusterById(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+     private:
+      friend class Stub;
+      explicit experimental_async(Stub* stub): stub_(stub) { }
+      Stub* stub() { return stub_; }
+      Stub* stub_;
+    };
+    class experimental_async_interface* experimental_async() override { return &async_stub_; }
 
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
+    class experimental_async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* AsyncRegisterNodeRaw(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* PrepareAsyncRegisterNodeRaw(::grpc::ClientContext* context, const ::rotr::NodeInfo& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* AsyncDiscoverClusterByIdRaw(::grpc::ClientContext* context, const ::google::protobuf::StringValue& request, ::grpc::CompletionQueue* cq) override;
@@ -318,7 +649,7 @@ class ClusterService final {
   template <class BaseClass>
   class WithAsyncMethod_RegisterNode : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_RegisterNode() {
       ::grpc::Service::MarkMethodAsync(0);
@@ -327,7 +658,7 @@ class ClusterService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RegisterNode(::grpc::ServerContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response) override {
+    ::grpc::Status RegisterNode(::grpc::ServerContext* /*context*/, const ::rotr::NodeInfo* /*request*/, ::rotr::ClusterInfo* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -338,7 +669,7 @@ class ClusterService final {
   template <class BaseClass>
   class WithAsyncMethod_DiscoverClusterById : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_DiscoverClusterById() {
       ::grpc::Service::MarkMethodAsync(1);
@@ -347,7 +678,7 @@ class ClusterService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response) override {
+    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* /*context*/, const ::google::protobuf::StringValue* /*request*/, ::rotr::ClusterInfo* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -357,9 +688,108 @@ class ClusterService final {
   };
   typedef WithAsyncMethod_RegisterNode<WithAsyncMethod_DiscoverClusterById<Service > > AsyncService;
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_RegisterNode : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_RegisterNode() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(0,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::rotr::NodeInfo, ::rotr::ClusterInfo>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response) { return this->RegisterNode(context, request, response); }));}
+    void SetMessageAllocatorFor_RegisterNode(
+        ::grpc::experimental::MessageAllocator< ::rotr::NodeInfo, ::rotr::ClusterInfo>* allocator) {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(0);
+    #endif
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::rotr::NodeInfo, ::rotr::ClusterInfo>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~ExperimentalWithCallbackMethod_RegisterNode() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RegisterNode(::grpc::ServerContext* /*context*/, const ::rotr::NodeInfo* /*request*/, ::rotr::ClusterInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* RegisterNode(
+      ::grpc::CallbackServerContext* /*context*/, const ::rotr::NodeInfo* /*request*/, ::rotr::ClusterInfo* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* RegisterNode(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::rotr::NodeInfo* /*request*/, ::rotr::ClusterInfo* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_DiscoverClusterById : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_DiscoverClusterById() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(1,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::google::protobuf::StringValue, ::rotr::ClusterInfo>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response) { return this->DiscoverClusterById(context, request, response); }));}
+    void SetMessageAllocatorFor_DiscoverClusterById(
+        ::grpc::experimental::MessageAllocator< ::google::protobuf::StringValue, ::rotr::ClusterInfo>* allocator) {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(1);
+    #endif
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::google::protobuf::StringValue, ::rotr::ClusterInfo>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~ExperimentalWithCallbackMethod_DiscoverClusterById() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* /*context*/, const ::google::protobuf::StringValue* /*request*/, ::rotr::ClusterInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* DiscoverClusterById(
+      ::grpc::CallbackServerContext* /*context*/, const ::google::protobuf::StringValue* /*request*/, ::rotr::ClusterInfo* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* DiscoverClusterById(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::google::protobuf::StringValue* /*request*/, ::rotr::ClusterInfo* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+  typedef ExperimentalWithCallbackMethod_RegisterNode<ExperimentalWithCallbackMethod_DiscoverClusterById<Service > > CallbackService;
+  #endif
+
+  typedef ExperimentalWithCallbackMethod_RegisterNode<ExperimentalWithCallbackMethod_DiscoverClusterById<Service > > ExperimentalCallbackService;
+  template <class BaseClass>
   class WithGenericMethod_RegisterNode : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_RegisterNode() {
       ::grpc::Service::MarkMethodGeneric(0);
@@ -368,7 +798,7 @@ class ClusterService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RegisterNode(::grpc::ServerContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response) override {
+    ::grpc::Status RegisterNode(::grpc::ServerContext* /*context*/, const ::rotr::NodeInfo* /*request*/, ::rotr::ClusterInfo* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -376,7 +806,7 @@ class ClusterService final {
   template <class BaseClass>
   class WithGenericMethod_DiscoverClusterById : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_DiscoverClusterById() {
       ::grpc::Service::MarkMethodGeneric(1);
@@ -385,7 +815,7 @@ class ClusterService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response) override {
+    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* /*context*/, const ::google::protobuf::StringValue* /*request*/, ::rotr::ClusterInfo* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -393,7 +823,7 @@ class ClusterService final {
   template <class BaseClass>
   class WithRawMethod_RegisterNode : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_RegisterNode() {
       ::grpc::Service::MarkMethodRaw(0);
@@ -402,7 +832,7 @@ class ClusterService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RegisterNode(::grpc::ServerContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response) override {
+    ::grpc::Status RegisterNode(::grpc::ServerContext* /*context*/, const ::rotr::NodeInfo* /*request*/, ::rotr::ClusterInfo* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -413,7 +843,7 @@ class ClusterService final {
   template <class BaseClass>
   class WithRawMethod_DiscoverClusterById : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_DiscoverClusterById() {
       ::grpc::Service::MarkMethodRaw(1);
@@ -422,7 +852,7 @@ class ClusterService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response) override {
+    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* /*context*/, const ::google::protobuf::StringValue* /*request*/, ::rotr::ClusterInfo* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -431,19 +861,102 @@ class ClusterService final {
     }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_RegisterNode : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_RegisterNode() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(0,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->RegisterNode(context, request, response); }));
+    }
+    ~ExperimentalWithRawCallbackMethod_RegisterNode() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RegisterNode(::grpc::ServerContext* /*context*/, const ::rotr::NodeInfo* /*request*/, ::rotr::ClusterInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* RegisterNode(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* RegisterNode(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_DiscoverClusterById : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_DiscoverClusterById() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(1,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->DiscoverClusterById(context, request, response); }));
+    }
+    ~ExperimentalWithRawCallbackMethod_DiscoverClusterById() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* /*context*/, const ::google::protobuf::StringValue* /*request*/, ::rotr::ClusterInfo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* DiscoverClusterById(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* DiscoverClusterById(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_RegisterNode : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_RegisterNode() {
       ::grpc::Service::MarkMethodStreamed(0,
-        new ::grpc::internal::StreamedUnaryHandler< ::rotr::NodeInfo, ::rotr::ClusterInfo>(std::bind(&WithStreamedUnaryMethod_RegisterNode<BaseClass>::StreamedRegisterNode, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::rotr::NodeInfo, ::rotr::ClusterInfo>(
+            [this](::grpc_impl::ServerContext* context,
+                   ::grpc_impl::ServerUnaryStreamer<
+                     ::rotr::NodeInfo, ::rotr::ClusterInfo>* streamer) {
+                       return this->StreamedRegisterNode(context,
+                         streamer);
+                  }));
     }
     ~WithStreamedUnaryMethod_RegisterNode() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status RegisterNode(::grpc::ServerContext* context, const ::rotr::NodeInfo* request, ::rotr::ClusterInfo* response) override {
+    ::grpc::Status RegisterNode(::grpc::ServerContext* /*context*/, const ::rotr::NodeInfo* /*request*/, ::rotr::ClusterInfo* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -453,17 +966,24 @@ class ClusterService final {
   template <class BaseClass>
   class WithStreamedUnaryMethod_DiscoverClusterById : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_DiscoverClusterById() {
       ::grpc::Service::MarkMethodStreamed(1,
-        new ::grpc::internal::StreamedUnaryHandler< ::google::protobuf::StringValue, ::rotr::ClusterInfo>(std::bind(&WithStreamedUnaryMethod_DiscoverClusterById<BaseClass>::StreamedDiscoverClusterById, this, std::placeholders::_1, std::placeholders::_2)));
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::google::protobuf::StringValue, ::rotr::ClusterInfo>(
+            [this](::grpc_impl::ServerContext* context,
+                   ::grpc_impl::ServerUnaryStreamer<
+                     ::google::protobuf::StringValue, ::rotr::ClusterInfo>* streamer) {
+                       return this->StreamedDiscoverClusterById(context,
+                         streamer);
+                  }));
     }
     ~WithStreamedUnaryMethod_DiscoverClusterById() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* context, const ::google::protobuf::StringValue* request, ::rotr::ClusterInfo* response) override {
+    ::grpc::Status DiscoverClusterById(::grpc::ServerContext* /*context*/, const ::google::protobuf::StringValue* /*request*/, ::rotr::ClusterInfo* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
