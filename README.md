@@ -17,8 +17,9 @@ rotr is the C++14 Raft consensus protocol implementation using RocksDB as storag
     
     CMake projects should use: "-DCMAKE_TOOLCHAIN_FILE=/home/<user-name>/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
-How to use VCPKG with CLion
-What Yoav tried to say is this: VCPKG provides a .cmake file to be used during configuration process, so that CMake can correctly recognize the needed libraries' paths. A good advice of its usage with CLion's cmake was found here ( https://github.com/Microsoft/vcpkg/issues/3572 ):
+##### How to use VCPKG with CLion
+- VCPKG provides a .cmake file to be used during configuration process, so that CMake can correctly recognize the needed libraries' paths. A good advice of its usage with CLion's cmake was found here ( https://github.com/Microsoft/vcpkg/issues/3572 ):
+
 
     Go to File -> Settings -> Build, Execution, Deployment -> CMake
     Choose one profile, and then find "CMake Options".
