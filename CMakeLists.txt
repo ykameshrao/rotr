@@ -10,9 +10,9 @@ CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX14)
 # This gives an error on date.h external library.
 # Following workaround forces Clang to compile at best with C++14
 if(COMPILER_SUPPORTS_CXX17 AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 ")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 elseif(COMPILER_SUPPORTS_CXX14)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 ")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 else()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++14 support. Please use a different C++ compiler.")
 endif()
@@ -36,10 +36,10 @@ add_executable(${MODULE_NAME} ${SOURCE})
 # Install cmake - https://cmake.org/install/
 # Install protobuf - https://github.com/protocolbuffers/protobuf/tree/master/src
 # Install grpc - https://github.com/grpc/grpc/tree/v1.15.0/src/cpp
+# Install grpc via VCPKG - https://github.com/grpc/grpc/blob/v1.30.0/src/cpp/README.md
 # Install rocksdb - https://github.com/facebook/rocksdb/blob/master/INSTALL.md
 # Install spdlog - https://github.com/gabime/spdlog#benchmarks (apt-get install libspdlog-dev)
 # Install yaml-cpp - https://github.com/jbeder/yaml-cpp.git
-
 
 
 # Install evpp - https://github.com/Qihoo360/evpp/blob/master/docs/quick_start.md

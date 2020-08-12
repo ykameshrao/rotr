@@ -1,3 +1,3 @@
-RaOTR - Raft On The RocksDB
+ROTR - Raft On The RocksDB
 
-Raotr is the C++17 Raft consensus protocol implementation on top of RocksDB.
+rotr is the C++14 Raft consensus protocol implementation using RocksDB as storage solution.
