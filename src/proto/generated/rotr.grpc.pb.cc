@@ -247,5 +247,165 @@ ClusterService::Service::~Service() {
 }
 
 
+static const char* RotrService_method_names[] = {
+  "/rotr.RotrService/Get",
+  "/rotr.RotrService/Put",
+  "/rotr.RotrService/DiscoverCluster",
+};
+
+std::unique_ptr< RotrService::Stub> RotrService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+  (void)options;
+  std::unique_ptr< RotrService::Stub> stub(new RotrService::Stub(channel));
+  return stub;
+}
+
+RotrService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
+  : channel_(channel), rpcmethod_Get_(RotrService_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_Put_(RotrService_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_DiscoverCluster_(RotrService_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  {}
+
+::grpc::Status RotrService::Stub::Get(::grpc::ClientContext* context, const ::rotr::RotrGetRequest& request, ::rotr::RotrGetResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_Get_, context, request, response);
+}
+
+void RotrService::Stub::experimental_async::Get(::grpc::ClientContext* context, const ::rotr::RotrGetRequest* request, ::rotr::RotrGetResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Get_, context, request, response, std::move(f));
+}
+
+void RotrService::Stub::experimental_async::Get(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::RotrGetResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Get_, context, request, response, std::move(f));
+}
+
+void RotrService::Stub::experimental_async::Get(::grpc::ClientContext* context, const ::rotr::RotrGetRequest* request, ::rotr::RotrGetResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_Get_, context, request, response, reactor);
+}
+
+void RotrService::Stub::experimental_async::Get(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::RotrGetResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_Get_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::rotr::RotrGetResponse>* RotrService::Stub::AsyncGetRaw(::grpc::ClientContext* context, const ::rotr::RotrGetRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::RotrGetResponse>::Create(channel_.get(), cq, rpcmethod_Get_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::rotr::RotrGetResponse>* RotrService::Stub::PrepareAsyncGetRaw(::grpc::ClientContext* context, const ::rotr::RotrGetRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::RotrGetResponse>::Create(channel_.get(), cq, rpcmethod_Get_, context, request, false);
+}
+
+::grpc::Status RotrService::Stub::Put(::grpc::ClientContext* context, const ::rotr::RotrPutRequest& request, ::rotr::RotrPutResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_Put_, context, request, response);
+}
+
+void RotrService::Stub::experimental_async::Put(::grpc::ClientContext* context, const ::rotr::RotrPutRequest* request, ::rotr::RotrPutResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Put_, context, request, response, std::move(f));
+}
+
+void RotrService::Stub::experimental_async::Put(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::RotrPutResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_Put_, context, request, response, std::move(f));
+}
+
+void RotrService::Stub::experimental_async::Put(::grpc::ClientContext* context, const ::rotr::RotrPutRequest* request, ::rotr::RotrPutResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_Put_, context, request, response, reactor);
+}
+
+void RotrService::Stub::experimental_async::Put(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::RotrPutResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_Put_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::rotr::RotrPutResponse>* RotrService::Stub::AsyncPutRaw(::grpc::ClientContext* context, const ::rotr::RotrPutRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::RotrPutResponse>::Create(channel_.get(), cq, rpcmethod_Put_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::rotr::RotrPutResponse>* RotrService::Stub::PrepareAsyncPutRaw(::grpc::ClientContext* context, const ::rotr::RotrPutRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::RotrPutResponse>::Create(channel_.get(), cq, rpcmethod_Put_, context, request, false);
+}
+
+::grpc::Status RotrService::Stub::DiscoverCluster(::grpc::ClientContext* context, const ::rotr::Null& request, ::rotr::ClusterInfo* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_DiscoverCluster_, context, request, response);
+}
+
+void RotrService::Stub::experimental_async::DiscoverCluster(::grpc::ClientContext* context, const ::rotr::Null* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_DiscoverCluster_, context, request, response, std::move(f));
+}
+
+void RotrService::Stub::experimental_async::DiscoverCluster(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, std::function<void(::grpc::Status)> f) {
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_DiscoverCluster_, context, request, response, std::move(f));
+}
+
+void RotrService::Stub::experimental_async::DiscoverCluster(::grpc::ClientContext* context, const ::rotr::Null* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_DiscoverCluster_, context, request, response, reactor);
+}
+
+void RotrService::Stub::experimental_async::DiscoverCluster(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::rotr::ClusterInfo* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_DiscoverCluster_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* RotrService::Stub::AsyncDiscoverClusterRaw(::grpc::ClientContext* context, const ::rotr::Null& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::ClusterInfo>::Create(channel_.get(), cq, rpcmethod_DiscoverCluster_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::rotr::ClusterInfo>* RotrService::Stub::PrepareAsyncDiscoverClusterRaw(::grpc::ClientContext* context, const ::rotr::Null& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::rotr::ClusterInfo>::Create(channel_.get(), cq, rpcmethod_DiscoverCluster_, context, request, false);
+}
+
+RotrService::Service::Service() {
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      RotrService_method_names[0],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< RotrService::Service, ::rotr::RotrGetRequest, ::rotr::RotrGetResponse>(
+          [](RotrService::Service* service,
+             ::grpc_impl::ServerContext* ctx,
+             const ::rotr::RotrGetRequest* req,
+             ::rotr::RotrGetResponse* resp) {
+               return service->Get(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      RotrService_method_names[1],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< RotrService::Service, ::rotr::RotrPutRequest, ::rotr::RotrPutResponse>(
+          [](RotrService::Service* service,
+             ::grpc_impl::ServerContext* ctx,
+             const ::rotr::RotrPutRequest* req,
+             ::rotr::RotrPutResponse* resp) {
+               return service->Put(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      RotrService_method_names[2],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< RotrService::Service, ::rotr::Null, ::rotr::ClusterInfo>(
+          [](RotrService::Service* service,
+             ::grpc_impl::ServerContext* ctx,
+             const ::rotr::Null* req,
+             ::rotr::ClusterInfo* resp) {
+               return service->DiscoverCluster(ctx, req, resp);
+             }, this)));
+}
+
+RotrService::Service::~Service() {
+}
+
+::grpc::Status RotrService::Service::Get(::grpc::ServerContext* context, const ::rotr::RotrGetRequest* request, ::rotr::RotrGetResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status RotrService::Service::Put(::grpc::ServerContext* context, const ::rotr::RotrPutRequest* request, ::rotr::RotrPutResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status RotrService::Service::DiscoverCluster(::grpc::ServerContext* context, const ::rotr::Null* request, ::rotr::ClusterInfo* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+
 }  // namespace rotr
 

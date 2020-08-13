@@ -44,6 +44,9 @@ message NodeInfoList {
     repeated NodeInfo nodes = 1;
 }
 
+message Null {
+}
+
 // request
 message AppendEntriesRequest {
     uint32 term = 1;
@@ -61,6 +64,16 @@ message RequestVoteRequest {
     uint32 lastLogTerm = 4;
 }
 
+message RotrGetRequest {
+    string key = 1;
+    uint32 version = 2;
+}
+
+message RotrPutRequest {
+    string key = 1;
+    string value = 2;
+}
+
 // responses
 message AppendEntriesResponse {
     uint32 currentTerm = 1;
@@ -72,6 +85,17 @@ message RequestVoteResponse {
     bool voteGranted = 2;
 }
 
+message RotrGetResponse {
+    string key = 1;
+    uint32 version = 2;
+    string value = 3;
+}
+
+message RotrPutResponse {
+    string key = 1;
+    uint32 version = 2;
+}
+
 // services
 service RaftInternalRPC {
     rpc AppendEntries (AppendEntriesRequest) returns (AppendEntriesResponse) {};
@@ -81,4 +105,10 @@ service RaftInternalRPC {
 service ClusterService {
     rpc RegisterNode (NodeInfo) returns (ClusterInfo) {}
     rpc DiscoverClusterById (google.protobuf.StringValue) returns (ClusterInfo) {}
+}
+
+service RotrService {
+    rpc Get (RotrGetRequest) returns (RotrGetResponse) {}
+    rpc Put (RotrPutRequest) returns (RotrPutResponse) {}
+    rpc DiscoverCluster (Null) returns (ClusterInfo) {}
 }

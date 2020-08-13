@@ -52,7 +52,7 @@ struct TableStruct_rotr_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[9]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[14]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -78,12 +78,27 @@ extern NodeInfoDefaultTypeInternal _NodeInfo_default_instance_;
 class NodeInfoList;
 class NodeInfoListDefaultTypeInternal;
 extern NodeInfoListDefaultTypeInternal _NodeInfoList_default_instance_;
+class Null;
+class NullDefaultTypeInternal;
+extern NullDefaultTypeInternal _Null_default_instance_;
 class RequestVoteRequest;
 class RequestVoteRequestDefaultTypeInternal;
 extern RequestVoteRequestDefaultTypeInternal _RequestVoteRequest_default_instance_;
 class RequestVoteResponse;
 class RequestVoteResponseDefaultTypeInternal;
 extern RequestVoteResponseDefaultTypeInternal _RequestVoteResponse_default_instance_;
+class RotrGetRequest;
+class RotrGetRequestDefaultTypeInternal;
+extern RotrGetRequestDefaultTypeInternal _RotrGetRequest_default_instance_;
+class RotrGetResponse;
+class RotrGetResponseDefaultTypeInternal;
+extern RotrGetResponseDefaultTypeInternal _RotrGetResponse_default_instance_;
+class RotrPutRequest;
+class RotrPutRequestDefaultTypeInternal;
+extern RotrPutRequestDefaultTypeInternal _RotrPutRequest_default_instance_;
+class RotrPutResponse;
+class RotrPutResponseDefaultTypeInternal;
+extern RotrPutResponseDefaultTypeInternal _RotrPutResponse_default_instance_;
 class Status;
 class StatusDefaultTypeInternal;
 extern StatusDefaultTypeInternal _Status_default_instance_;
@@ -95,8 +110,13 @@ template<> ::rotr::AppendEntriesResponse* Arena::CreateMaybeMessage<::rotr::Appe
 template<> ::rotr::ClusterInfo* Arena::CreateMaybeMessage<::rotr::ClusterInfo>(Arena*);
 template<> ::rotr::NodeInfo* Arena::CreateMaybeMessage<::rotr::NodeInfo>(Arena*);
 template<> ::rotr::NodeInfoList* Arena::CreateMaybeMessage<::rotr::NodeInfoList>(Arena*);
+template<> ::rotr::Null* Arena::CreateMaybeMessage<::rotr::Null>(Arena*);
 template<> ::rotr::RequestVoteRequest* Arena::CreateMaybeMessage<::rotr::RequestVoteRequest>(Arena*);
 template<> ::rotr::RequestVoteResponse* Arena::CreateMaybeMessage<::rotr::RequestVoteResponse>(Arena*);
+template<> ::rotr::RotrGetRequest* Arena::CreateMaybeMessage<::rotr::RotrGetRequest>(Arena*);
+template<> ::rotr::RotrGetResponse* Arena::CreateMaybeMessage<::rotr::RotrGetResponse>(Arena*);
+template<> ::rotr::RotrPutRequest* Arena::CreateMaybeMessage<::rotr::RotrPutRequest>(Arena*);
+template<> ::rotr::RotrPutResponse* Arena::CreateMaybeMessage<::rotr::RotrPutResponse>(Arena*);
 template<> ::rotr::Status* Arena::CreateMaybeMessage<::rotr::Status>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace rotr {
@@ -841,6 +861,130 @@ class NodeInfoList PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class Null PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rotr.Null) */ {
+ public:
+  inline Null() : Null(nullptr) {}
+  virtual ~Null();
+
+  Null(const Null& from);
+  Null(Null&& from) noexcept
+    : Null() {
+    *this = ::std::move(from);
+  }
+
+  inline Null& operator=(const Null& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Null& operator=(Null&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const Null& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const Null* internal_default_instance() {
+    return reinterpret_cast<const Null*>(
+               &_Null_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(Null& a, Null& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(Null* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Null* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Null* New() const final {
+    return CreateMaybeMessage<Null>(nullptr);
+  }
+
+  Null* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<Null>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const Null& from);
+  void MergeFrom(const Null& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Null* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "rotr.Null";
+  }
+  protected:
+  explicit Null(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_rotr_2eproto);
+    return ::descriptor_table_rotr_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:rotr.Null)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_rotr_2eproto;
+};
+// -------------------------------------------------------------------
+
 class AppendEntriesRequest_EntriesEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<AppendEntriesRequest_EntriesEntry_DoNotUse, 
     std::string, std::string,
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
@@ -867,7 +1011,7 @@ public:
   private:
   static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
     ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_rotr_2eproto);
-    return ::descriptor_table_rotr_2eproto.file_level_metadata[4];
+    return ::descriptor_table_rotr_2eproto.file_level_metadata[5];
   }
 
   public:
@@ -917,7 +1061,7 @@ class AppendEntriesRequest PROTOBUF_FINAL :
                &_AppendEntriesRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(AppendEntriesRequest& a, AppendEntriesRequest& b) {
     a.Swap(&b);
@@ -1132,7 +1276,7 @@ class RequestVoteRequest PROTOBUF_FINAL :
                &_RequestVoteRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(RequestVoteRequest& a, RequestVoteRequest& b) {
     a.Swap(&b);
@@ -1269,6 +1413,323 @@ class RequestVoteRequest PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class RotrGetRequest PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rotr.RotrGetRequest) */ {
+ public:
+  inline RotrGetRequest() : RotrGetRequest(nullptr) {}
+  virtual ~RotrGetRequest();
+
+  RotrGetRequest(const RotrGetRequest& from);
+  RotrGetRequest(RotrGetRequest&& from) noexcept
+    : RotrGetRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline RotrGetRequest& operator=(const RotrGetRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RotrGetRequest& operator=(RotrGetRequest&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const RotrGetRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RotrGetRequest* internal_default_instance() {
+    return reinterpret_cast<const RotrGetRequest*>(
+               &_RotrGetRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    8;
+
+  friend void swap(RotrGetRequest& a, RotrGetRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(RotrGetRequest* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(RotrGetRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RotrGetRequest* New() const final {
+    return CreateMaybeMessage<RotrGetRequest>(nullptr);
+  }
+
+  RotrGetRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<RotrGetRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const RotrGetRequest& from);
+  void MergeFrom(const RotrGetRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RotrGetRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "rotr.RotrGetRequest";
+  }
+  protected:
+  explicit RotrGetRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_rotr_2eproto);
+    return ::descriptor_table_rotr_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kKeyFieldNumber = 1,
+    kVersionFieldNumber = 2,
+  };
+  // string key = 1;
+  void clear_key();
+  const std::string& key() const;
+  void set_key(const std::string& value);
+  void set_key(std::string&& value);
+  void set_key(const char* value);
+  void set_key(const char* value, size_t size);
+  std::string* mutable_key();
+  std::string* release_key();
+  void set_allocated_key(std::string* key);
+  private:
+  const std::string& _internal_key() const;
+  void _internal_set_key(const std::string& value);
+  std::string* _internal_mutable_key();
+  public:
+
+  // uint32 version = 2;
+  void clear_version();
+  ::PROTOBUF_NAMESPACE_ID::uint32 version() const;
+  void set_version(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_version() const;
+  void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:rotr.RotrGetRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr key_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 version_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_rotr_2eproto;
+};
+// -------------------------------------------------------------------
+
+class RotrPutRequest PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rotr.RotrPutRequest) */ {
+ public:
+  inline RotrPutRequest() : RotrPutRequest(nullptr) {}
+  virtual ~RotrPutRequest();
+
+  RotrPutRequest(const RotrPutRequest& from);
+  RotrPutRequest(RotrPutRequest&& from) noexcept
+    : RotrPutRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline RotrPutRequest& operator=(const RotrPutRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RotrPutRequest& operator=(RotrPutRequest&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const RotrPutRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RotrPutRequest* internal_default_instance() {
+    return reinterpret_cast<const RotrPutRequest*>(
+               &_RotrPutRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(RotrPutRequest& a, RotrPutRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(RotrPutRequest* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(RotrPutRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RotrPutRequest* New() const final {
+    return CreateMaybeMessage<RotrPutRequest>(nullptr);
+  }
+
+  RotrPutRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<RotrPutRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const RotrPutRequest& from);
+  void MergeFrom(const RotrPutRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RotrPutRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "rotr.RotrPutRequest";
+  }
+  protected:
+  explicit RotrPutRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_rotr_2eproto);
+    return ::descriptor_table_rotr_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kKeyFieldNumber = 1,
+    kValueFieldNumber = 2,
+  };
+  // string key = 1;
+  void clear_key();
+  const std::string& key() const;
+  void set_key(const std::string& value);
+  void set_key(std::string&& value);
+  void set_key(const char* value);
+  void set_key(const char* value, size_t size);
+  std::string* mutable_key();
+  std::string* release_key();
+  void set_allocated_key(std::string* key);
+  private:
+  const std::string& _internal_key() const;
+  void _internal_set_key(const std::string& value);
+  std::string* _internal_mutable_key();
+  public:
+
+  // string value = 2;
+  void clear_value();
+  const std::string& value() const;
+  void set_value(const std::string& value);
+  void set_value(std::string&& value);
+  void set_value(const char* value);
+  void set_value(const char* value, size_t size);
+  std::string* mutable_value();
+  std::string* release_value();
+  void set_allocated_value(std::string* value);
+  private:
+  const std::string& _internal_value() const;
+  void _internal_set_value(const std::string& value);
+  std::string* _internal_mutable_value();
+  public:
+
+  // @@protoc_insertion_point(class_scope:rotr.RotrPutRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr key_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr value_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_rotr_2eproto;
+};
+// -------------------------------------------------------------------
+
 class AppendEntriesResponse PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rotr.AppendEntriesResponse) */ {
  public:
@@ -1311,7 +1772,7 @@ class AppendEntriesResponse PROTOBUF_FINAL :
                &_AppendEntriesResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    10;
 
   friend void swap(AppendEntriesResponse& a, AppendEntriesResponse& b) {
     a.Swap(&b);
@@ -1459,7 +1920,7 @@ class RequestVoteResponse PROTOBUF_FINAL :
                &_RequestVoteResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    11;
 
   friend void swap(RequestVoteResponse& a, RequestVoteResponse& b) {
     a.Swap(&b);
@@ -1560,6 +2021,334 @@ class RequestVoteResponse PROTOBUF_FINAL :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::uint32 term_;
   bool votegranted_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_rotr_2eproto;
+};
+// -------------------------------------------------------------------
+
+class RotrGetResponse PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rotr.RotrGetResponse) */ {
+ public:
+  inline RotrGetResponse() : RotrGetResponse(nullptr) {}
+  virtual ~RotrGetResponse();
+
+  RotrGetResponse(const RotrGetResponse& from);
+  RotrGetResponse(RotrGetResponse&& from) noexcept
+    : RotrGetResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline RotrGetResponse& operator=(const RotrGetResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RotrGetResponse& operator=(RotrGetResponse&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const RotrGetResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RotrGetResponse* internal_default_instance() {
+    return reinterpret_cast<const RotrGetResponse*>(
+               &_RotrGetResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    12;
+
+  friend void swap(RotrGetResponse& a, RotrGetResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(RotrGetResponse* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(RotrGetResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RotrGetResponse* New() const final {
+    return CreateMaybeMessage<RotrGetResponse>(nullptr);
+  }
+
+  RotrGetResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<RotrGetResponse>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const RotrGetResponse& from);
+  void MergeFrom(const RotrGetResponse& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RotrGetResponse* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "rotr.RotrGetResponse";
+  }
+  protected:
+  explicit RotrGetResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_rotr_2eproto);
+    return ::descriptor_table_rotr_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kKeyFieldNumber = 1,
+    kValueFieldNumber = 3,
+    kVersionFieldNumber = 2,
+  };
+  // string key = 1;
+  void clear_key();
+  const std::string& key() const;
+  void set_key(const std::string& value);
+  void set_key(std::string&& value);
+  void set_key(const char* value);
+  void set_key(const char* value, size_t size);
+  std::string* mutable_key();
+  std::string* release_key();
+  void set_allocated_key(std::string* key);
+  private:
+  const std::string& _internal_key() const;
+  void _internal_set_key(const std::string& value);
+  std::string* _internal_mutable_key();
+  public:
+
+  // string value = 3;
+  void clear_value();
+  const std::string& value() const;
+  void set_value(const std::string& value);
+  void set_value(std::string&& value);
+  void set_value(const char* value);
+  void set_value(const char* value, size_t size);
+  std::string* mutable_value();
+  std::string* release_value();
+  void set_allocated_value(std::string* value);
+  private:
+  const std::string& _internal_value() const;
+  void _internal_set_value(const std::string& value);
+  std::string* _internal_mutable_value();
+  public:
+
+  // uint32 version = 2;
+  void clear_version();
+  ::PROTOBUF_NAMESPACE_ID::uint32 version() const;
+  void set_version(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_version() const;
+  void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:rotr.RotrGetResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr key_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr value_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 version_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_rotr_2eproto;
+};
+// -------------------------------------------------------------------
+
+class RotrPutResponse PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rotr.RotrPutResponse) */ {
+ public:
+  inline RotrPutResponse() : RotrPutResponse(nullptr) {}
+  virtual ~RotrPutResponse();
+
+  RotrPutResponse(const RotrPutResponse& from);
+  RotrPutResponse(RotrPutResponse&& from) noexcept
+    : RotrPutResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline RotrPutResponse& operator=(const RotrPutResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RotrPutResponse& operator=(RotrPutResponse&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const RotrPutResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RotrPutResponse* internal_default_instance() {
+    return reinterpret_cast<const RotrPutResponse*>(
+               &_RotrPutResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    13;
+
+  friend void swap(RotrPutResponse& a, RotrPutResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(RotrPutResponse* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(RotrPutResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RotrPutResponse* New() const final {
+    return CreateMaybeMessage<RotrPutResponse>(nullptr);
+  }
+
+  RotrPutResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<RotrPutResponse>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const RotrPutResponse& from);
+  void MergeFrom(const RotrPutResponse& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RotrPutResponse* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "rotr.RotrPutResponse";
+  }
+  protected:
+  explicit RotrPutResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_rotr_2eproto);
+    return ::descriptor_table_rotr_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kKeyFieldNumber = 1,
+    kVersionFieldNumber = 2,
+  };
+  // string key = 1;
+  void clear_key();
+  const std::string& key() const;
+  void set_key(const std::string& value);
+  void set_key(std::string&& value);
+  void set_key(const char* value);
+  void set_key(const char* value, size_t size);
+  std::string* mutable_key();
+  std::string* release_key();
+  void set_allocated_key(std::string* key);
+  private:
+  const std::string& _internal_key() const;
+  void _internal_set_key(const std::string& value);
+  std::string* _internal_mutable_key();
+  public:
+
+  // uint32 version = 2;
+  void clear_version();
+  ::PROTOBUF_NAMESPACE_ID::uint32 version() const;
+  void set_version(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_version() const;
+  void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:rotr.RotrPutResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr key_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 version_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_rotr_2eproto;
 };
@@ -2223,6 +3012,10 @@ NodeInfoList::nodes() const {
 
 // -------------------------------------------------------------------
 
+// Null
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // AppendEntriesRequest
@@ -2568,6 +3361,220 @@ inline void RequestVoteRequest::set_lastlogterm(::PROTOBUF_NAMESPACE_ID::uint32 
 
 // -------------------------------------------------------------------
 
+// RotrGetRequest
+
+// string key = 1;
+inline void RotrGetRequest::clear_key() {
+  key_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& RotrGetRequest::key() const {
+  // @@protoc_insertion_point(field_get:rotr.RotrGetRequest.key)
+  return _internal_key();
+}
+inline void RotrGetRequest::set_key(const std::string& value) {
+  _internal_set_key(value);
+  // @@protoc_insertion_point(field_set:rotr.RotrGetRequest.key)
+}
+inline std::string* RotrGetRequest::mutable_key() {
+  // @@protoc_insertion_point(field_mutable:rotr.RotrGetRequest.key)
+  return _internal_mutable_key();
+}
+inline const std::string& RotrGetRequest::_internal_key() const {
+  return key_.Get();
+}
+inline void RotrGetRequest::_internal_set_key(const std::string& value) {
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void RotrGetRequest::set_key(std::string&& value) {
+  
+  key_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:rotr.RotrGetRequest.key)
+}
+inline void RotrGetRequest::set_key(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:rotr.RotrGetRequest.key)
+}
+inline void RotrGetRequest::set_key(const char* value,
+    size_t size) {
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:rotr.RotrGetRequest.key)
+}
+inline std::string* RotrGetRequest::_internal_mutable_key() {
+  
+  return key_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* RotrGetRequest::release_key() {
+  // @@protoc_insertion_point(field_release:rotr.RotrGetRequest.key)
+  return key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void RotrGetRequest::set_allocated_key(std::string* key) {
+  if (key != nullptr) {
+    
+  } else {
+    
+  }
+  key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), key,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:rotr.RotrGetRequest.key)
+}
+
+// uint32 version = 2;
+inline void RotrGetRequest::clear_version() {
+  version_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 RotrGetRequest::_internal_version() const {
+  return version_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 RotrGetRequest::version() const {
+  // @@protoc_insertion_point(field_get:rotr.RotrGetRequest.version)
+  return _internal_version();
+}
+inline void RotrGetRequest::_internal_set_version(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  version_ = value;
+}
+inline void RotrGetRequest::set_version(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_version(value);
+  // @@protoc_insertion_point(field_set:rotr.RotrGetRequest.version)
+}
+
+// -------------------------------------------------------------------
+
+// RotrPutRequest
+
+// string key = 1;
+inline void RotrPutRequest::clear_key() {
+  key_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& RotrPutRequest::key() const {
+  // @@protoc_insertion_point(field_get:rotr.RotrPutRequest.key)
+  return _internal_key();
+}
+inline void RotrPutRequest::set_key(const std::string& value) {
+  _internal_set_key(value);
+  // @@protoc_insertion_point(field_set:rotr.RotrPutRequest.key)
+}
+inline std::string* RotrPutRequest::mutable_key() {
+  // @@protoc_insertion_point(field_mutable:rotr.RotrPutRequest.key)
+  return _internal_mutable_key();
+}
+inline const std::string& RotrPutRequest::_internal_key() const {
+  return key_.Get();
+}
+inline void RotrPutRequest::_internal_set_key(const std::string& value) {
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void RotrPutRequest::set_key(std::string&& value) {
+  
+  key_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:rotr.RotrPutRequest.key)
+}
+inline void RotrPutRequest::set_key(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:rotr.RotrPutRequest.key)
+}
+inline void RotrPutRequest::set_key(const char* value,
+    size_t size) {
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:rotr.RotrPutRequest.key)
+}
+inline std::string* RotrPutRequest::_internal_mutable_key() {
+  
+  return key_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* RotrPutRequest::release_key() {
+  // @@protoc_insertion_point(field_release:rotr.RotrPutRequest.key)
+  return key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void RotrPutRequest::set_allocated_key(std::string* key) {
+  if (key != nullptr) {
+    
+  } else {
+    
+  }
+  key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), key,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:rotr.RotrPutRequest.key)
+}
+
+// string value = 2;
+inline void RotrPutRequest::clear_value() {
+  value_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& RotrPutRequest::value() const {
+  // @@protoc_insertion_point(field_get:rotr.RotrPutRequest.value)
+  return _internal_value();
+}
+inline void RotrPutRequest::set_value(const std::string& value) {
+  _internal_set_value(value);
+  // @@protoc_insertion_point(field_set:rotr.RotrPutRequest.value)
+}
+inline std::string* RotrPutRequest::mutable_value() {
+  // @@protoc_insertion_point(field_mutable:rotr.RotrPutRequest.value)
+  return _internal_mutable_value();
+}
+inline const std::string& RotrPutRequest::_internal_value() const {
+  return value_.Get();
+}
+inline void RotrPutRequest::_internal_set_value(const std::string& value) {
+  
+  value_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void RotrPutRequest::set_value(std::string&& value) {
+  
+  value_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:rotr.RotrPutRequest.value)
+}
+inline void RotrPutRequest::set_value(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  value_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:rotr.RotrPutRequest.value)
+}
+inline void RotrPutRequest::set_value(const char* value,
+    size_t size) {
+  
+  value_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:rotr.RotrPutRequest.value)
+}
+inline std::string* RotrPutRequest::_internal_mutable_value() {
+  
+  return value_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* RotrPutRequest::release_value() {
+  // @@protoc_insertion_point(field_release:rotr.RotrPutRequest.value)
+  return value_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void RotrPutRequest::set_allocated_value(std::string* value) {
+  if (value != nullptr) {
+    
+  } else {
+    
+  }
+  value_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:rotr.RotrPutRequest.value)
+}
+
+// -------------------------------------------------------------------
+
 // AppendEntriesResponse
 
 // uint32 currentTerm = 1;
@@ -2654,9 +3661,253 @@ inline void RequestVoteResponse::set_votegranted(bool value) {
   // @@protoc_insertion_point(field_set:rotr.RequestVoteResponse.voteGranted)
 }
 
+// -------------------------------------------------------------------
+
+// RotrGetResponse
+
+// string key = 1;
+inline void RotrGetResponse::clear_key() {
+  key_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& RotrGetResponse::key() const {
+  // @@protoc_insertion_point(field_get:rotr.RotrGetResponse.key)
+  return _internal_key();
+}
+inline void RotrGetResponse::set_key(const std::string& value) {
+  _internal_set_key(value);
+  // @@protoc_insertion_point(field_set:rotr.RotrGetResponse.key)
+}
+inline std::string* RotrGetResponse::mutable_key() {
+  // @@protoc_insertion_point(field_mutable:rotr.RotrGetResponse.key)
+  return _internal_mutable_key();
+}
+inline const std::string& RotrGetResponse::_internal_key() const {
+  return key_.Get();
+}
+inline void RotrGetResponse::_internal_set_key(const std::string& value) {
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void RotrGetResponse::set_key(std::string&& value) {
+  
+  key_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:rotr.RotrGetResponse.key)
+}
+inline void RotrGetResponse::set_key(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:rotr.RotrGetResponse.key)
+}
+inline void RotrGetResponse::set_key(const char* value,
+    size_t size) {
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:rotr.RotrGetResponse.key)
+}
+inline std::string* RotrGetResponse::_internal_mutable_key() {
+  
+  return key_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* RotrGetResponse::release_key() {
+  // @@protoc_insertion_point(field_release:rotr.RotrGetResponse.key)
+  return key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void RotrGetResponse::set_allocated_key(std::string* key) {
+  if (key != nullptr) {
+    
+  } else {
+    
+  }
+  key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), key,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:rotr.RotrGetResponse.key)
+}
+
+// uint32 version = 2;
+inline void RotrGetResponse::clear_version() {
+  version_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 RotrGetResponse::_internal_version() const {
+  return version_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 RotrGetResponse::version() const {
+  // @@protoc_insertion_point(field_get:rotr.RotrGetResponse.version)
+  return _internal_version();
+}
+inline void RotrGetResponse::_internal_set_version(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  version_ = value;
+}
+inline void RotrGetResponse::set_version(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_version(value);
+  // @@protoc_insertion_point(field_set:rotr.RotrGetResponse.version)
+}
+
+// string value = 3;
+inline void RotrGetResponse::clear_value() {
+  value_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& RotrGetResponse::value() const {
+  // @@protoc_insertion_point(field_get:rotr.RotrGetResponse.value)
+  return _internal_value();
+}
+inline void RotrGetResponse::set_value(const std::string& value) {
+  _internal_set_value(value);
+  // @@protoc_insertion_point(field_set:rotr.RotrGetResponse.value)
+}
+inline std::string* RotrGetResponse::mutable_value() {
+  // @@protoc_insertion_point(field_mutable:rotr.RotrGetResponse.value)
+  return _internal_mutable_value();
+}
+inline const std::string& RotrGetResponse::_internal_value() const {
+  return value_.Get();
+}
+inline void RotrGetResponse::_internal_set_value(const std::string& value) {
+  
+  value_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void RotrGetResponse::set_value(std::string&& value) {
+  
+  value_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:rotr.RotrGetResponse.value)
+}
+inline void RotrGetResponse::set_value(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  value_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:rotr.RotrGetResponse.value)
+}
+inline void RotrGetResponse::set_value(const char* value,
+    size_t size) {
+  
+  value_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:rotr.RotrGetResponse.value)
+}
+inline std::string* RotrGetResponse::_internal_mutable_value() {
+  
+  return value_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* RotrGetResponse::release_value() {
+  // @@protoc_insertion_point(field_release:rotr.RotrGetResponse.value)
+  return value_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void RotrGetResponse::set_allocated_value(std::string* value) {
+  if (value != nullptr) {
+    
+  } else {
+    
+  }
+  value_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:rotr.RotrGetResponse.value)
+}
+
+// -------------------------------------------------------------------
+
+// RotrPutResponse
+
+// string key = 1;
+inline void RotrPutResponse::clear_key() {
+  key_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& RotrPutResponse::key() const {
+  // @@protoc_insertion_point(field_get:rotr.RotrPutResponse.key)
+  return _internal_key();
+}
+inline void RotrPutResponse::set_key(const std::string& value) {
+  _internal_set_key(value);
+  // @@protoc_insertion_point(field_set:rotr.RotrPutResponse.key)
+}
+inline std::string* RotrPutResponse::mutable_key() {
+  // @@protoc_insertion_point(field_mutable:rotr.RotrPutResponse.key)
+  return _internal_mutable_key();
+}
+inline const std::string& RotrPutResponse::_internal_key() const {
+  return key_.Get();
+}
+inline void RotrPutResponse::_internal_set_key(const std::string& value) {
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void RotrPutResponse::set_key(std::string&& value) {
+  
+  key_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:rotr.RotrPutResponse.key)
+}
+inline void RotrPutResponse::set_key(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:rotr.RotrPutResponse.key)
+}
+inline void RotrPutResponse::set_key(const char* value,
+    size_t size) {
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:rotr.RotrPutResponse.key)
+}
+inline std::string* RotrPutResponse::_internal_mutable_key() {
+  
+  return key_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* RotrPutResponse::release_key() {
+  // @@protoc_insertion_point(field_release:rotr.RotrPutResponse.key)
+  return key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void RotrPutResponse::set_allocated_key(std::string* key) {
+  if (key != nullptr) {
+    
+  } else {
+    
+  }
+  key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), key,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:rotr.RotrPutResponse.key)
+}
+
+// uint32 version = 2;
+inline void RotrPutResponse::clear_version() {
+  version_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 RotrPutResponse::_internal_version() const {
+  return version_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 RotrPutResponse::version() const {
+  // @@protoc_insertion_point(field_get:rotr.RotrPutResponse.version)
+  return _internal_version();
+}
+inline void RotrPutResponse::_internal_set_version(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  version_ = value;
+}
+inline void RotrPutResponse::set_version(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_version(value);
+  // @@protoc_insertion_point(field_set:rotr.RotrPutResponse.version)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
