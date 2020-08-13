@@ -14,7 +14,7 @@ namespace rotr {
         shared_ptr<PersistentStore> _persistentStore;
 
         void putSerializedNodeList(const stringstream &key, const vector<pair<string, string>> &values);
-        vector<pair<string, string>> &&getDeserializedNodeList(const stringstream &key);
+        void getDeserializedNodeList(const stringstream &key, vector<pair<string, string>> &val);
     public:
         ClusterHandler(const shared_ptr<Configuration>& configuration,
                        const shared_ptr<PersistentStore>& persistentStore);
@@ -24,8 +24,8 @@ namespace rotr {
         void setup(const string& clusterId, const string& ip, const string& port);
         void addNode(const string& clusterId, const string& ip, const string& port);
         void addSeedNode(const string& clusterId, const string& ip, const string& port);
-        vector<pair<string, string>> &&getAllNodes(const string& clusterId);
-        vector<pair<string, string>> &&getAllSeedNodes(const string& clusterId);
+        void getAllNodes(const string& clusterId, vector<pair<string, string>>& val);
+        void getAllSeedNodes(const string& clusterId, vector<pair<string, string>>& val);
     };
 }
 

@@ -35,8 +35,6 @@ void rotr::PersistentStore::put(const string &columnFamily, const string &key, c
     _rdbClient->putInCF(columnFamily, key, data);
 }
 
-string &&rotr::PersistentStore::get(const string &columnFamily, const string &key) {
-    string val;
+void rotr::PersistentStore::get(const string &columnFamily, const string &key, string &val) {
     _rdbClient->getInCF(columnFamily, key, val);
-    return move(val);
 }

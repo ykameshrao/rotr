@@ -33,7 +33,7 @@ namespace rotr {
         string &operator[](CF cf);
         string &cf(CF cf);
         void put(const string &columnFamily, const string &key, const string &data);
-        string &&get(const string &columnFamily, const string &key);
+        void get(const string &columnFamily, const string &key, string &val);
     };
 }
 

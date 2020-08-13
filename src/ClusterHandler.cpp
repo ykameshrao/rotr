@@ -19,7 +19,8 @@ void rotr::ClusterHandler::setup(const string &clusterId, const string &ip, cons
 }
 
 void rotr::ClusterHandler::addNode(const string &clusterId, const string &ip, const string &port) {
-    auto allNodes = getAllNodes(clusterId);
+    vector<pair<string, string>> allNodes;
+    getAllNodes(clusterId, allNodes);
     allNodes.push_back(make_pair(ip, port));
 
     stringstream key;
@@ -29,7 +30,8 @@ void rotr::ClusterHandler::addNode(const string &clusterId, const string &ip, co
 }
 
 void rotr::ClusterHandler::addSeedNode(const string &clusterId, const string &ip, const string &port) {
-    auto allSeedNodes = getAllSeedNodes(clusterId);
+    vector<pair<string, string>> allSeedNodes;
+    getAllNodes(clusterId, allSeedNodes);
     allSeedNodes.push_back(make_pair(ip, port));
 
     stringstream key;
@@ -38,27 +40,25 @@ void rotr::ClusterHandler::addSeedNode(const string &clusterId, const string &ip
     putSerializedNodeList(key, allSeedNodes);
 }
 
-vector<pair<string, string>> &&rotr::ClusterHandler::getAllNodes(const string &clusterId) {
+void rotr::ClusterHandler::getAllNodes(const string &clusterId, vector<pair<string, string>> &val) {
     stringstream key;
     key << "ClusterId-" << clusterId << "-AllNodes";
-
-    return getDeserializedNodeList(key);
+    getDeserializedNodeList(key, val);
 }
 
 
-vector<pair<string, string>> &&rotr::ClusterHandler::getAllSeedNodes(const string &clusterId) {
+void rotr::ClusterHandler::getAllSeedNodes(const string &clusterId, vector<pair<string, string>> &val) {
     stringstream key;
     key << "ClusterId-" << clusterId << "-SeedNodes";
-
-    return getDeserializedNodeList(key);
+    getDeserializedNodeList(key, val);
 }
 
-vector<pair<string, string>> &&rotr::ClusterHandler::getDeserializedNodeList(const stringstream &key) {
-    string response = _persistentStore->get(_persistentStore->cf(rotr::META_INF), key.str());
+void rotr::ClusterHandler::getDeserializedNodeList(const stringstream &key, vector<pair<string, string>> &val) {
+    string response;
+    _persistentStore->get(_persistentStore->cf(rotr::META_INF), key.str(), response);
     if (response.empty())
-        return move(vector<pair<string, string>>());
+        throw "key not found";
     else {
-        vector<pair<string, string>> result;
         vector<string> allNodeAddrs;
         Utils::tokenize(response, ",", allNodeAddrs);
         for (string na : allNodeAddrs) {
@@ -67,10 +67,8 @@ vector<pair<string, string>> &&rotr::ClusterHandler::getDeserializedNodeList(con
             Utils::tokenize(na, ":", addr);
             p.first = addr[0];
             p.second = addr[1];
-            result.push_back(p);
+            val.push_back(p);
         }
-
-        return move(result);
     }
 }
 
