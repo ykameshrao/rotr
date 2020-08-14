@@ -1,0 +1,10 @@
+- clusterId: Local
+  clusterName: LocalRotr
+  dataDir: /tmp/rotr
+  logDir: /tmp/rotr-svc-logs/
+  tick: 1000
+  clusterNodes:
+    - clusterRpcService:
+    - port: 36001
+  raftRpcService:
+    - port: 36002

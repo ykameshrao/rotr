@@ -12,7 +12,7 @@ using namespace rotr;
 using namespace rotr::common;
 
 int main(int argc, char* argv[]) {
-    Container::I().logger = std::make_shared<Logger>("rotr.log");
+    Container::I().logger = make_shared<Logger>("rotr.log");
     auto logger = Container::I().logger;
 
     logger->info("\n\n            __ _                   _   _                           _        \n"

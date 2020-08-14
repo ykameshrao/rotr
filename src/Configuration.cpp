@@ -22,10 +22,12 @@ rotr::Configuration::Configuration(int argc, char **argv) {
     opt->addUsage("--start-at\t\t\t\tip:port based address to start this broker at");
     opt->addUsage("--data-dir-path \t\tData storage location");
     opt->addUsage("--cluster-id \t\t\tUser defined identifier for the cluster");
+    opt->addUsage("--config-path \t\t\tUser defined yaml based configuration for the cluster");
 
     opt->setOption("start-at");
     opt->setOption("data-dir-path");
     opt->setOption("cluster-id");
+    opt->setOption("config-path");
 
     opt->processCommandArgs(argc, argv);
 
@@ -33,6 +35,7 @@ rotr::Configuration::Configuration(int argc, char **argv) {
         opt->printUsage();
         exit(-1);
     }
+
 
     vector<string> localAddr;
     Utils::tokenize(opt->getValue("start-at"), ":", localAddr);

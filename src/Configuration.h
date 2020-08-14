@@ -12,13 +12,20 @@
 using namespace std;
 
 namespace rotr {
+    struct RaftRpc {
+        string port;
+    };
+
     class Configuration {
     private:
         string _clusterId;
         string _dataDirPath;
         string _port;
         string _ip;
+        string _configPath;
         vector <pair<string, string>> _seeds;
+
+
     public:
         Configuration(int argc, char* argv[]);
         Configuration(const Configuration &) = delete;
@@ -30,6 +37,7 @@ namespace rotr {
         string ip() { return _ip; }
         string port() { return _port; }
         string dataLocation() { return _dataDirPath; }
+        string configPath() { return _configPath; }
 
         bool isCurrentNodeSeed() {
             return _seeds.end() != find_if(_seeds.begin(), _seeds.end(),
