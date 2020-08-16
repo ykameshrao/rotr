@@ -10,7 +10,7 @@
 #include <grpcpp/grpcpp.h>
 
 #include "common/Container.h"
-#include "ClusterServiceImpl.h"
+#include "ReplicationServiceImpl.h"
 #include "Configuration.h"
 #include "PersistentStore.h"
 

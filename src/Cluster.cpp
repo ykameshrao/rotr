@@ -14,7 +14,7 @@ void Cluster::clusterServiceThread() {
     clusterHandler->setup(_configuration->clusterId(), _configuration->ip(), _configuration->port());
 
     logger->info("Starting the cluster service on the same port...{}", _configuration->port());
-    ClusterServiceImpl clusterService(move(clusterHandler));
+    ReplicationServiceImpl clusterService(move(clusterHandler));
     grpc::ServerBuilder builder;
 
     stringstream serverAddress;

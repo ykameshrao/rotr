@@ -1,10 +1,17 @@
 - clusterId: Local
-  clusterName: LocalRotr
+  clusterName: Rotr-Local
   dataDir: /tmp/rotr
   logDir: /tmp/rotr-svc-logs/
   tick: 1000
-  clusterNodes:
-    - clusterRpcService:
+  isSeed: true
+  seedNodes:
+    - host: 0.0.0.0
+      port: 36001
+    - host: 0.0.0.0
+      port: 36002
+  rotrRpcService:
+    - port: 19831     # To be 1983 when all nodes are not running on the same machine
+  clusterRpcService:  # To be set by and started only on seed nodes, Other cluster nodes
     - port: 36001
   raftRpcService:
-    - port: 36002
+    - port: 36010

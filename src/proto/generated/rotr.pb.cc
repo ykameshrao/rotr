@@ -452,20 +452,17 @@ const char descriptor_table_protodef_rotr_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "\022\013\n\003key\030\001 \001(\t\022\017\n\007version\030\002 \001(\r\022\r\n\005value\030"
   "\003 \001(\t\"/\n\017RotrPutResponse\022\013\n\003key\030\001 \001(\t\022\017\n"
   "\007version\030\002 \001(\r*0\n\nStatusCode\022\010\n\004None\020\000\022\013"
-  "\n\007Failure\020\001\022\013\n\007Success\020\0022\243\001\n\017RaftInterna"
-  "lRPC\022J\n\rAppendEntries\022\032.rotr.AppendEntri"
-  "esRequest\032\033.rotr.AppendEntriesResponse\"\000"
-  "\022D\n\013RequestVote\022\030.rotr.RequestVoteReques"
-  "t\032\031.rotr.RequestVoteResponse\"\0002\217\001\n\016Clust"
-  "erService\0223\n\014RegisterNode\022\016.rotr.NodeInf"
-  "o\032\021.rotr.ClusterInfo\"\000\022H\n\023DiscoverCluste"
-  "rById\022\034.google.protobuf.StringValue\032\021.ro"
-  "tr.ClusterInfo\"\0002\255\001\n\013RotrService\0224\n\003Get\022"
-  "\024.rotr.RotrGetRequest\032\025.rotr.RotrGetResp"
-  "onse\"\000\0224\n\003Put\022\024.rotr.RotrPutRequest\032\025.ro"
-  "tr.RotrPutResponse\"\000\0222\n\017DiscoverCluster\022"
-  "\n.rotr.Null\032\021.rotr.ClusterInfo\"\000B\006\n\004rotr"
-  "b\006proto3"
+  "\n\007Failure\020\001\022\013\n\007Success\020\0022`\n\022ReplicationS"
+  "ervice\022J\n\rAppendEntries\022\032.rotr.AppendEnt"
+  "riesRequest\032\033.rotr.AppendEntriesResponse"
+  "\"\0002W\n\017ElectionService\022D\n\013RequestVote\022\030.r"
+  "otr.RequestVoteRequest\032\031.rotr.RequestVot"
+  "eResponse\"\0002\255\001\n\013RotrService\0224\n\003Get\022\024.rot"
+  "r.RotrGetRequest\032\025.rotr.RotrGetResponse\""
+  "\000\0224\n\003Put\022\024.rotr.RotrPutRequest\032\025.rotr.Ro"
+  "trPutResponse\"\000\0222\n\017DiscoverCluster\022\n.rot"
+  "r.Null\032\021.rotr.ClusterInfo\"\000B\006\n\004rotrb\006pro"
+  "to3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_rotr_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fwrappers_2eproto,
@@ -488,7 +485,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_rot
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_rotr_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_rotr_2eproto = {
-  false, false, descriptor_table_protodef_rotr_2eproto, "rotr.proto", 1648,
+  false, false, descriptor_table_protodef_rotr_2eproto, "rotr.proto", 1523,
   &descriptor_table_rotr_2eproto_once, descriptor_table_rotr_2eproto_sccs, descriptor_table_rotr_2eproto_deps, 14, 1,
   schemas, file_default_instances, TableStruct_rotr_2eproto::offsets,
   file_level_metadata_rotr_2eproto, 14, file_level_enum_descriptors_rotr_2eproto, file_level_service_descriptors_rotr_2eproto,

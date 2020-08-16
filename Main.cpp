@@ -4,7 +4,7 @@
 
 #include "src/common/Logger.h"
 #include "src/common/Container.h"
-#include "src/RaftInternalRPCServiceImpl.h"
+#include "src/ElectionServiceImpl.h"
 #include "src/Configuration.h"
 
 using namespace std;
@@ -29,11 +29,11 @@ int main(int argc, char* argv[]) {
 
     stringstream serverAddress;
     serverAddress << configuration->ip() << ":" << configuration->port();
-    RaftInternalRPCServiceImpl raftInternalRpcService;
+    ElectionServiceImpl electionService;
 
     grpc::ServerBuilder builder;
     builder.AddListeningPort(serverAddress.str(), grpc::InsecureServerCredentials());
-    builder.RegisterService(&raftInternalRpcService);
+    builder.RegisterService(&electionService);
     unique_ptr<grpc::Server> server(builder.BuildAndStart());
 
     logger->info("Node listening on port {}...", configuration->ip());

@@ -97,14 +97,12 @@ message RotrPutResponse {
 }
 
 // services
-service RaftInternalRPC {
+service ReplicationService {
     rpc AppendEntries (AppendEntriesRequest) returns (AppendEntriesResponse) {};
-    rpc RequestVote (RequestVoteRequest) returns (RequestVoteResponse) {};
 }
 
-service ClusterService {
-    rpc RegisterNode (NodeInfo) returns (ClusterInfo) {}
-    rpc DiscoverClusterById (google.protobuf.StringValue) returns (ClusterInfo) {}
+service ElectionService {
+    rpc RequestVote (RequestVoteRequest) returns (RequestVoteResponse) {};
 }
 
 service RotrService {
