@@ -19,14 +19,10 @@ rotr::Configuration::Configuration(int argc, char **argv) {
 
     opt->addUsage("Usage: ");
     opt->addUsage("");
-    opt->addUsage("--start-at\t\t\t\tip:port based address to start this broker at");
-    opt->addUsage("--data-dir-path \t\tData storage location");
-    opt->addUsage("--cluster-id \t\t\tUser defined identifier for the cluster");
+    opt->addUsage("--node-id \t\t\tUser defined identifier for the node from the configured list of nodes");
     opt->addUsage("--config-path \t\t\tUser defined yaml based configuration for the cluster");
 
-    opt->setOption("start-at");
-    opt->setOption("data-dir-path");
-    opt->setOption("cluster-id");
+    opt->setOption("node-id");
     opt->setOption("config-path");
 
     opt->processCommandArgs(argc, argv);
@@ -36,15 +32,10 @@ rotr::Configuration::Configuration(int argc, char **argv) {
         exit(-1);
     }
 
+    _nodeId = opt->getValue("node-id");
+    _configPath = opt->getValue("config-path");
 
-    vector<string> localAddr;
-    Utils::tokenize(opt->getValue("start-at"), ":", localAddr);
-    _ip = localAddr[0];
-    _port = localAddr[1];
-    _dataDirPath = opt->getValue("data-dir-path");
-    _clusterId = opt->getValue("cluster-id");
-
-    logger->info("Node be reachable at : {}", opt->getValue("start-at"));
-    logger->info("Node data dir at : {}", opt->getValue("data-dir-path"));
-    logger->info("ClusterId : {}", opt->getValue("cluster-id"));
+    //logger->info("Node be reachable at : {}", opt->getValue("start-at"));
+    //logger->info("Node data dir at : {}", opt->getValue("data-dir-path"));
+    //logger->info("ClusterId : {}", opt->getValue("cluster-id"));
 }

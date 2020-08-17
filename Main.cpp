@@ -27,16 +27,16 @@ int main(int argc, char* argv[]) {
     //--start-at 0.0.0.0:50051 --data-dir-path /tmp/rotr --cluster-id Local
     unique_ptr<Configuration> configuration = make_unique<Configuration>(argc, argv);
 
-    stringstream serverAddress;
-    serverAddress << configuration->ip() << ":" << configuration->port();
-    ElectionServiceImpl electionService;
+    //stringstream serverAddress;
+    //serverAddress << configuration->ip() << ":" << configuration->port();
+    //ElectionServiceImpl electionService;
 
-    grpc::ServerBuilder builder;
-    builder.AddListeningPort(serverAddress.str(), grpc::InsecureServerCredentials());
-    builder.RegisterService(&electionService);
-    unique_ptr<grpc::Server> server(builder.BuildAndStart());
+    //grpc::ServerBuilder builder;
+    //builder.AddListeningPort(serverAddress.str(), grpc::InsecureServerCredentials());
+    //builder.RegisterService(&electionService);
+    //unique_ptr<grpc::Server> server(builder.BuildAndStart());
 
-    logger->info("Node listening on port {}...", configuration->ip());
-    server->Wait();
+    //logger->info("Node listening on port {}...", configuration->ip());
+    //server->Wait();
     return 0;
 }

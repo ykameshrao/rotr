@@ -296,6 +296,9 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_rotr_2eproto::offsets[] PROTOB
   PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, isleader_),
   PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, clusterid_),
   PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, clustername_),
+  PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, rotrport_),
+  PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, replicationport_),
+  PROTOBUF_FIELD_OFFSET(::rotr::NodeInfo, electionport_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::rotr::ClusterInfo, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -392,18 +395,18 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_rotr_2eproto::offsets[] PROTOB
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::rotr::Status)},
   { 7, -1, sizeof(::rotr::NodeInfo)},
-  { 17, -1, sizeof(::rotr::ClusterInfo)},
-  { 26, -1, sizeof(::rotr::NodeInfoList)},
-  { 32, -1, sizeof(::rotr::Null)},
-  { 37, 44, sizeof(::rotr::AppendEntriesRequest_EntriesEntry_DoNotUse)},
-  { 46, -1, sizeof(::rotr::AppendEntriesRequest)},
-  { 57, -1, sizeof(::rotr::RequestVoteRequest)},
-  { 66, -1, sizeof(::rotr::RotrGetRequest)},
-  { 73, -1, sizeof(::rotr::RotrPutRequest)},
-  { 80, -1, sizeof(::rotr::AppendEntriesResponse)},
-  { 87, -1, sizeof(::rotr::RequestVoteResponse)},
-  { 94, -1, sizeof(::rotr::RotrGetResponse)},
-  { 102, -1, sizeof(::rotr::RotrPutResponse)},
+  { 20, -1, sizeof(::rotr::ClusterInfo)},
+  { 29, -1, sizeof(::rotr::NodeInfoList)},
+  { 35, -1, sizeof(::rotr::Null)},
+  { 40, 47, sizeof(::rotr::AppendEntriesRequest_EntriesEntry_DoNotUse)},
+  { 49, -1, sizeof(::rotr::AppendEntriesRequest)},
+  { 60, -1, sizeof(::rotr::RequestVoteRequest)},
+  { 69, -1, sizeof(::rotr::RotrGetRequest)},
+  { 76, -1, sizeof(::rotr::RotrPutRequest)},
+  { 83, -1, sizeof(::rotr::AppendEntriesResponse)},
+  { 90, -1, sizeof(::rotr::RequestVoteResponse)},
+  { 97, -1, sizeof(::rotr::RotrGetResponse)},
+  { 105, -1, sizeof(::rotr::RotrPutResponse)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -426,43 +429,44 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 const char descriptor_table_protodef_rotr_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\nrotr.proto\022\004rotr\032\036google/protobuf/wrap"
   "pers.proto\"\?\n\006Status\022$\n\nstatusCode\030\001 \001(\016"
-  "2\020.rotr.StatusCode\022\017\n\007message\030\002 \001(\t\"k\n\010N"
-  "odeInfo\022\023\n\013ipV4Address\030\001 \001(\t\022\020\n\010hostName"
-  "\030\002 \001(\t\022\020\n\010isLeader\030\003 \001(\010\022\021\n\tclusterId\030\004 "
-  "\001(\t\022\023\n\013clusterName\030\005 \001(\t\"t\n\013ClusterInfo\022"
-  "\023\n\013clusterName\030\001 \001(\t\022\021\n\tclusterId\030\002 \001(\t\022"
-  "\035\n\005nodes\030\003 \003(\0132\016.rotr.NodeInfo\022\036\n\006leader"
-  "\030\005 \001(\0132\016.rotr.NodeInfo\"-\n\014NodeInfoList\022\035"
-  "\n\005nodes\030\001 \003(\0132\016.rotr.NodeInfo\"\006\n\004Null\"\370\001"
-  "\n\024AppendEntriesRequest\022\014\n\004term\030\001 \001(\r\022\"\n\n"
-  "leaderNode\030\002 \001(\0132\016.rotr.NodeInfo\022\024\n\014prev"
-  "LogIndex\030\003 \001(\r\022\023\n\013prevLogTerm\030\004 \001(\r\022\031\n\021l"
-  "eaderCommitIndex\030\005 \001(\r\0228\n\007entries\030\006 \003(\0132"
-  "\'.rotr.AppendEntriesRequest.EntriesEntry"
-  "\032.\n\014EntriesEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002"
-  " \001(\t:\0028\001\"t\n\022RequestVoteRequest\022\014\n\004term\030\001"
-  " \001(\r\022%\n\rcandidateNode\030\002 \001(\0132\016.rotr.NodeI"
-  "nfo\022\024\n\014lastLogIndex\030\003 \001(\r\022\023\n\013lastLogTerm"
-  "\030\004 \001(\r\".\n\016RotrGetRequest\022\013\n\003key\030\001 \001(\t\022\017\n"
-  "\007version\030\002 \001(\r\",\n\016RotrPutRequest\022\013\n\003key\030"
-  "\001 \001(\t\022\r\n\005value\030\002 \001(\t\"=\n\025AppendEntriesRes"
-  "ponse\022\023\n\013currentTerm\030\001 \001(\r\022\017\n\007success\030\002 "
-  "\001(\010\"8\n\023RequestVoteResponse\022\014\n\004term\030\001 \001(\r"
-  "\022\023\n\013voteGranted\030\002 \001(\010\">\n\017RotrGetResponse"
-  "\022\013\n\003key\030\001 \001(\t\022\017\n\007version\030\002 \001(\r\022\r\n\005value\030"
-  "\003 \001(\t\"/\n\017RotrPutResponse\022\013\n\003key\030\001 \001(\t\022\017\n"
-  "\007version\030\002 \001(\r*0\n\nStatusCode\022\010\n\004None\020\000\022\013"
-  "\n\007Failure\020\001\022\013\n\007Success\020\0022`\n\022ReplicationS"
-  "ervice\022J\n\rAppendEntries\022\032.rotr.AppendEnt"
-  "riesRequest\032\033.rotr.AppendEntriesResponse"
-  "\"\0002W\n\017ElectionService\022D\n\013RequestVote\022\030.r"
-  "otr.RequestVoteRequest\032\031.rotr.RequestVot"
-  "eResponse\"\0002\255\001\n\013RotrService\0224\n\003Get\022\024.rot"
-  "r.RotrGetRequest\032\025.rotr.RotrGetResponse\""
-  "\000\0224\n\003Put\022\024.rotr.RotrPutRequest\032\025.rotr.Ro"
-  "trPutResponse\"\000\0222\n\017DiscoverCluster\022\n.rot"
-  "r.Null\032\021.rotr.ClusterInfo\"\000B\006\n\004rotrb\006pro"
-  "to3"
+  "2\020.rotr.StatusCode\022\017\n\007message\030\002 \001(\t\"\254\001\n\010"
+  "NodeInfo\022\023\n\013ipV4Address\030\001 \001(\t\022\020\n\010hostNam"
+  "e\030\002 \001(\t\022\020\n\010isLeader\030\003 \001(\010\022\021\n\tclusterId\030\004"
+  " \001(\t\022\023\n\013clusterName\030\005 \001(\t\022\020\n\010rotrPort\030\006 "
+  "\001(\r\022\027\n\017replicationPort\030\007 \001(\r\022\024\n\014election"
+  "Port\030\010 \001(\r\"t\n\013ClusterInfo\022\023\n\013clusterName"
+  "\030\001 \001(\t\022\021\n\tclusterId\030\002 \001(\t\022\035\n\005nodes\030\003 \003(\013"
+  "2\016.rotr.NodeInfo\022\036\n\006leader\030\004 \001(\0132\016.rotr."
+  "NodeInfo\"-\n\014NodeInfoList\022\035\n\005nodes\030\001 \003(\0132"
+  "\016.rotr.NodeInfo\"\006\n\004Null\"\370\001\n\024AppendEntrie"
+  "sRequest\022\014\n\004term\030\001 \001(\r\022\"\n\nleaderNode\030\002 \001"
+  "(\0132\016.rotr.NodeInfo\022\024\n\014prevLogIndex\030\003 \001(\r"
+  "\022\023\n\013prevLogTerm\030\004 \001(\r\022\031\n\021leaderCommitInd"
+  "ex\030\005 \001(\r\0228\n\007entries\030\006 \003(\0132\'.rotr.AppendE"
+  "ntriesRequest.EntriesEntry\032.\n\014EntriesEnt"
+  "ry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"t\n\022Re"
+  "questVoteRequest\022\014\n\004term\030\001 \001(\r\022%\n\rcandid"
+  "ateNode\030\002 \001(\0132\016.rotr.NodeInfo\022\024\n\014lastLog"
+  "Index\030\003 \001(\r\022\023\n\013lastLogTerm\030\004 \001(\r\".\n\016Rotr"
+  "GetRequest\022\013\n\003key\030\001 \001(\t\022\017\n\007version\030\002 \001(\r"
+  "\",\n\016RotrPutRequest\022\013\n\003key\030\001 \001(\t\022\r\n\005value"
+  "\030\002 \001(\t\"=\n\025AppendEntriesResponse\022\023\n\013curre"
+  "ntTerm\030\001 \001(\r\022\017\n\007success\030\002 \001(\010\"8\n\023Request"
+  "VoteResponse\022\014\n\004term\030\001 \001(\r\022\023\n\013voteGrante"
+  "d\030\002 \001(\010\">\n\017RotrGetResponse\022\013\n\003key\030\001 \001(\t\022"
+  "\017\n\007version\030\002 \001(\r\022\r\n\005value\030\003 \001(\t\"/\n\017RotrP"
+  "utResponse\022\013\n\003key\030\001 \001(\t\022\017\n\007version\030\002 \001(\r"
+  "*0\n\nStatusCode\022\010\n\004None\020\000\022\013\n\007Failure\020\001\022\013\n"
+  "\007Success\020\0022`\n\022ReplicationService\022J\n\rAppe"
+  "ndEntries\022\032.rotr.AppendEntriesRequest\032\033."
+  "rotr.AppendEntriesResponse\"\0002W\n\017Election"
+  "Service\022D\n\013RequestVote\022\030.rotr.RequestVot"
+  "eRequest\032\031.rotr.RequestVoteResponse\"\0002\255\001"
+  "\n\013RotrService\0224\n\003Get\022\024.rotr.RotrGetReque"
+  "st\032\025.rotr.RotrGetResponse\"\000\0224\n\003Put\022\024.rot"
+  "r.RotrPutRequest\032\025.rotr.RotrPutResponse\""
+  "\000\0222\n\017DiscoverCluster\022\n.rotr.Null\032\021.rotr."
+  "ClusterInfo\"\000B\006\n\004rotrb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_rotr_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fwrappers_2eproto,
@@ -485,7 +489,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_rot
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_rotr_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_rotr_2eproto = {
-  false, false, descriptor_table_protodef_rotr_2eproto, "rotr.proto", 1523,
+  false, false, descriptor_table_protodef_rotr_2eproto, "rotr.proto", 1589,
   &descriptor_table_rotr_2eproto_once, descriptor_table_rotr_2eproto_sccs, descriptor_table_rotr_2eproto_deps, 14, 1,
   schemas, file_default_instances, TableStruct_rotr_2eproto::offsets,
   file_level_metadata_rotr_2eproto, 14, file_level_enum_descriptors_rotr_2eproto, file_level_service_descriptors_rotr_2eproto,
@@ -784,7 +788,9 @@ NodeInfo::NodeInfo(const NodeInfo& from)
     clustername_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_clustername(),
       GetArena());
   }
-  isleader_ = from.isleader_;
+  ::memcpy(&isleader_, &from.isleader_,
+    static_cast<size_t>(reinterpret_cast<char*>(&electionport_) -
+    reinterpret_cast<char*>(&isleader_)) + sizeof(electionport_));
   // @@protoc_insertion_point(copy_constructor:rotr.NodeInfo)
 }
 
@@ -794,7 +800,9 @@ void NodeInfo::SharedCtor() {
   hostname_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   clusterid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   clustername_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  isleader_ = false;
+  ::memset(&isleader_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&electionport_) -
+      reinterpret_cast<char*>(&isleader_)) + sizeof(electionport_));
 }
 
 NodeInfo::~NodeInfo() {
@@ -836,7 +844,9 @@ void NodeInfo::Clear() {
   hostname_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   clusterid_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   clustername_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  isleader_ = false;
+  ::memset(&isleader_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&electionport_) -
+      reinterpret_cast<char*>(&isleader_)) + sizeof(electionport_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -888,6 +898,27 @@ const char* NodeInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
           auto str = _internal_mutable_clustername();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "rotr.NodeInfo.clusterName"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint32 rotrPort = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
+          rotrport_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint32 replicationPort = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
+          replicationport_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint32 electionPort = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 64)) {
+          electionport_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -965,6 +996,24 @@ failure:
         5, this->_internal_clustername(), target);
   }
 
+  // uint32 rotrPort = 6;
+  if (this->rotrport() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(6, this->_internal_rotrport(), target);
+  }
+
+  // uint32 replicationPort = 7;
+  if (this->replicationport() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(7, this->_internal_replicationport(), target);
+  }
+
+  // uint32 electionPort = 8;
+  if (this->electionport() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(8, this->_internal_electionport(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1014,6 +1063,27 @@ size_t NodeInfo::ByteSizeLong() const {
     total_size += 1 + 1;
   }
 
+  // uint32 rotrPort = 6;
+  if (this->rotrport() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->_internal_rotrport());
+  }
+
+  // uint32 replicationPort = 7;
+  if (this->replicationport() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->_internal_replicationport());
+  }
+
+  // uint32 electionPort = 8;
+  if (this->electionport() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
+        this->_internal_electionport());
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
         _internal_metadata_, total_size, &_cached_size_);
@@ -1060,6 +1130,15 @@ void NodeInfo::MergeFrom(const NodeInfo& from) {
   if (from.isleader() != 0) {
     _internal_set_isleader(from._internal_isleader());
   }
+  if (from.rotrport() != 0) {
+    _internal_set_rotrport(from._internal_rotrport());
+  }
+  if (from.replicationport() != 0) {
+    _internal_set_replicationport(from._internal_replicationport());
+  }
+  if (from.electionport() != 0) {
+    _internal_set_electionport(from._internal_electionport());
+  }
 }
 
 void NodeInfo::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -1087,7 +1166,12 @@ void NodeInfo::InternalSwap(NodeInfo* other) {
   hostname_.Swap(&other->hostname_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   clusterid_.Swap(&other->clusterid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   clustername_.Swap(&other->clustername_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  swap(isleader_, other->isleader_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(NodeInfo, electionport_)
+      + sizeof(NodeInfo::electionport_)
+      - PROTOBUF_FIELD_OFFSET(NodeInfo, isleader_)>(
+          reinterpret_cast<char*>(&isleader_),
+          reinterpret_cast<char*>(&other->isleader_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata NodeInfo::GetMetadata() const {
@@ -1228,9 +1312,9 @@ const char* ClusterInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
         } else goto handle_unusual;
         continue;
-      // .rotr.NodeInfo leader = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+      // .rotr.NodeInfo leader = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           ptr = ctx->ParseMessage(_internal_mutable_leader(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
@@ -1291,12 +1375,12 @@ failure:
       InternalWriteMessage(3, this->_internal_nodes(i), target, stream);
   }
 
-  // .rotr.NodeInfo leader = 5;
+  // .rotr.NodeInfo leader = 4;
   if (this->has_leader()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        5, _Internal::leader(this), target, stream);
+        4, _Internal::leader(this), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1336,7 +1420,7 @@ size_t ClusterInfo::ByteSizeLong() const {
         this->_internal_clusterid());
   }
 
-  // .rotr.NodeInfo leader = 5;
+  // .rotr.NodeInfo leader = 4;
   if (this->has_leader()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(

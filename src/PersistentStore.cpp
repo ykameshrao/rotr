@@ -15,12 +15,12 @@ rotr::PersistentStore::PersistentStore(const shared_ptr<Configuration>& configur
         ttls[kv.second] = 1209600;
     }
 
-    if (configuration->isCurrentNodeSeed()) {
-        _columnFamilies[CF::META_INF] = "META_INF";
-        ttls[_columnFamilies[CF::META_INF]] = 0;
-    }
+    //if (configuration->isCurrentNodeSeed()) {
+    //    _columnFamilies[CF::META_INF] = "META_INF";
+    //    ttls[_columnFamilies[CF::META_INF]] = 0;
+    //}
 
-    _rdbClient = make_shared<RocksDBClient>(configuration->dataLocation(), mapValues, true, ttls);
+    //_rdbClient = make_shared<RocksDBClient>(configuration->dataLocation(), mapValues, true, ttls);
 }
 
 string &rotr::PersistentStore::operator[](rotr::CF cf) {

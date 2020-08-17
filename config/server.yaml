@@ -3,15 +3,19 @@
   dataDir: /tmp/rotr
   logDir: /tmp/rotr-svc-logs/
   tick: 1000
-  isSeed: true
-  seedNodes:
-    - host: 0.0.0.0
-      port: 36001
-    - host: 0.0.0.0
-      port: 36002
-  rotrRpcService:
-    - port: 19831     # To be 1983 when all nodes are not running on the same machine
-  clusterRpcService:  # To be set by and started only on seed nodes, Other cluster nodes
-    - port: 36001
-  raftRpcService:
-    - port: 36010
+  nodes:
+    - id: rotr.1
+      host: 0.0.0.0
+      rotrPort: 19831
+      replicationPort: 36001
+      electionPort: 36010
+    - id: rotr.2
+      host: 0.0.0.0
+      rotrPort: 19832           # To be same as previous node when all nodes are not running on the same machine
+      replicationPort: 36002    # To be same as previous node when all nodes are not running on the same machine
+      electionPort: 36020       # To be same as previous node when all nodes are not running on the same machine
+    - id: rotr.3
+      host: 0.0.0.0
+      rotrPort: 19833           # To be same as previous node when all nodes are not running on the same machine
+      replicationPort: 36003    # To be same as previous node when all nodes are not running on the same machine
+      electionPort: 36030       # To be same as previous node when all nodes are not running on the same machine

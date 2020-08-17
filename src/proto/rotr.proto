@@ -31,13 +31,16 @@ message NodeInfo {
     bool isLeader = 3;
     string clusterId = 4;
     string clusterName = 5;
+    uint32 rotrPort = 6;
+    uint32 replicationPort = 7;
+    uint32 electionPort = 8;
 }
 
 message ClusterInfo {
     string clusterName = 1;
     string clusterId = 2;
     repeated NodeInfo nodes = 3;
-    NodeInfo leader = 5;
+    NodeInfo leader = 4;
 }
 
 message NodeInfoList {

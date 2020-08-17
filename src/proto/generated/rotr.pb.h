@@ -422,6 +422,9 @@ class NodeInfo PROTOBUF_FINAL :
     kClusterIdFieldNumber = 4,
     kClusterNameFieldNumber = 5,
     kIsLeaderFieldNumber = 3,
+    kRotrPortFieldNumber = 6,
+    kReplicationPortFieldNumber = 7,
+    kElectionPortFieldNumber = 8,
   };
   // string ipV4Address = 1;
   void clear_ipv4address();
@@ -496,6 +499,33 @@ class NodeInfo PROTOBUF_FINAL :
   void _internal_set_isleader(bool value);
   public:
 
+  // uint32 rotrPort = 6;
+  void clear_rotrport();
+  ::PROTOBUF_NAMESPACE_ID::uint32 rotrport() const;
+  void set_rotrport(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_rotrport() const;
+  void _internal_set_rotrport(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // uint32 replicationPort = 7;
+  void clear_replicationport();
+  ::PROTOBUF_NAMESPACE_ID::uint32 replicationport() const;
+  void set_replicationport(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_replicationport() const;
+  void _internal_set_replicationport(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // uint32 electionPort = 8;
+  void clear_electionport();
+  ::PROTOBUF_NAMESPACE_ID::uint32 electionport() const;
+  void set_electionport(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_electionport() const;
+  void _internal_set_electionport(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:rotr.NodeInfo)
  private:
   class _Internal;
@@ -508,6 +538,9 @@ class NodeInfo PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clusterid_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr clustername_;
   bool isleader_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 rotrport_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 replicationport_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 electionport_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_rotr_2eproto;
 };
@@ -629,7 +662,7 @@ class ClusterInfo PROTOBUF_FINAL :
     kNodesFieldNumber = 3,
     kClusterNameFieldNumber = 1,
     kClusterIdFieldNumber = 2,
-    kLeaderFieldNumber = 5,
+    kLeaderFieldNumber = 4,
   };
   // repeated .rotr.NodeInfo nodes = 3;
   int nodes_size() const;
@@ -681,7 +714,7 @@ class ClusterInfo PROTOBUF_FINAL :
   std::string* _internal_mutable_clusterid();
   public:
 
-  // .rotr.NodeInfo leader = 5;
+  // .rotr.NodeInfo leader = 4;
   bool has_leader() const;
   private:
   bool _internal_has_leader() const;
@@ -2717,6 +2750,66 @@ inline void NodeInfo::set_allocated_clustername(std::string* clustername) {
   // @@protoc_insertion_point(field_set_allocated:rotr.NodeInfo.clusterName)
 }
 
+// uint32 rotrPort = 6;
+inline void NodeInfo::clear_rotrport() {
+  rotrport_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 NodeInfo::_internal_rotrport() const {
+  return rotrport_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 NodeInfo::rotrport() const {
+  // @@protoc_insertion_point(field_get:rotr.NodeInfo.rotrPort)
+  return _internal_rotrport();
+}
+inline void NodeInfo::_internal_set_rotrport(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  rotrport_ = value;
+}
+inline void NodeInfo::set_rotrport(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_rotrport(value);
+  // @@protoc_insertion_point(field_set:rotr.NodeInfo.rotrPort)
+}
+
+// uint32 replicationPort = 7;
+inline void NodeInfo::clear_replicationport() {
+  replicationport_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 NodeInfo::_internal_replicationport() const {
+  return replicationport_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 NodeInfo::replicationport() const {
+  // @@protoc_insertion_point(field_get:rotr.NodeInfo.replicationPort)
+  return _internal_replicationport();
+}
+inline void NodeInfo::_internal_set_replicationport(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  replicationport_ = value;
+}
+inline void NodeInfo::set_replicationport(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_replicationport(value);
+  // @@protoc_insertion_point(field_set:rotr.NodeInfo.replicationPort)
+}
+
+// uint32 electionPort = 8;
+inline void NodeInfo::clear_electionport() {
+  electionport_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 NodeInfo::_internal_electionport() const {
+  return electionport_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 NodeInfo::electionport() const {
+  // @@protoc_insertion_point(field_get:rotr.NodeInfo.electionPort)
+  return _internal_electionport();
+}
+inline void NodeInfo::_internal_set_electionport(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  electionport_ = value;
+}
+inline void NodeInfo::set_electionport(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_electionport(value);
+  // @@protoc_insertion_point(field_set:rotr.NodeInfo.electionPort)
+}
+
 // -------------------------------------------------------------------
 
 // ClusterInfo
@@ -2884,7 +2977,7 @@ ClusterInfo::nodes() const {
   return nodes_;
 }
 
-// .rotr.NodeInfo leader = 5;
+// .rotr.NodeInfo leader = 4;
 inline bool ClusterInfo::_internal_has_leader() const {
   return this != internal_default_instance() && leader_ != nullptr;
 }

@@ -12,19 +12,28 @@
 using namespace std;
 
 namespace rotr {
-    struct RaftRpc {
-        string port;
+    struct node {
+        string id;
+        string host;
+        uint16_t rotrPort;
+        uint16_t replicationPort;
+        uint16_t electionPort;
+    };
+
+    struct cluster {
+        string clusterId;
+        string clusterName;
+        string dataDirPath;
+        string logDirPath;
+        uint16_t tick;
+        vector <node> nodes;
     };
 
     class Configuration {
     private:
-        string _clusterId;
-        string _dataDirPath;
-        string _port;
-        string _ip;
         string _configPath;
-        vector <pair<string, string>> _seeds;
-
+        string _nodeId;
+        cluster _clusterConfig;
 
     public:
         Configuration(int argc, char* argv[]);
@@ -33,18 +42,9 @@ namespace rotr {
         Configuration(Configuration &&) = delete;
         Configuration &operator=(Configuration &&) = delete;
 
-        string clusterId() { return _clusterId; }
-        string ip() { return _ip; }
-        string port() { return _port; }
-        string dataLocation() { return _dataDirPath; }
         string configPath() { return _configPath; }
-
-        bool isCurrentNodeSeed() {
-            return _seeds.end() != find_if(_seeds.begin(), _seeds.end(),
-                                           [&](pair <string, string> p) {
-                                               return p.first == _ip && p.second == _port;
-                                           });
-        }
+        string nodeId() { return _nodeId; }
+        cluster clusterConfig() { return _clusterConfig; }
     };
 }
 
