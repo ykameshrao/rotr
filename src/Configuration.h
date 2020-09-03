@@ -47,7 +47,7 @@ namespace rotr {
         string configPath() { return _configFilePath; }
         string nodeId() { return _nodeId; }
         cluster clusterConfig() { return _clusterConfig; }
-
+        node curNodeConfig() { return _clusterConfig.nodes[nodeId()]; }
         void parseAndLoadConfig(string configFilePath);
     };
 }

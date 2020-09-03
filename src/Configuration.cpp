@@ -37,10 +37,12 @@ rotr::Configuration::Configuration(int argc, char **argv) {
 
     parseAndLoadConfig(_configFilePath);
 
-    logger->info("Rotr Service be reachable at: {}", clusterConfig().nodes[nodeId()].rotrPort);
-    logger->info("Rotr data dir at: {}", clusterConfig().dataDirPath);
     logger->info("ClusterId: {}", clusterConfig().clusterId);
+    logger->info("ClusterName: {}", clusterConfig().clusterName);
     logger->info("NodeId: {}", nodeId());
+    logger->info("Rotr Service be reachable at: {}", clusterConfig().nodes[nodeId()].rotrPort);
+    logger->info("Rotr Data Dir at: {}", clusterConfig().dataDirPath);
+    logger->info("Rotr Log Dir at: {}", clusterConfig().logDirPath);
 }
 
 void rotr::Configuration::parseAndLoadConfig(string configFilePath) {

@@ -27,16 +27,16 @@ int main(int argc, char* argv[]) {
     // Command Line Params: --node-id rotr.1 --config-path <path-to-config>/server.yaml
     unique_ptr<Configuration> configuration = make_unique<Configuration>(argc, argv);
 
-    //stringstream serverAddress;
-    //serverAddress << configuration->ip() << ":" << configuration->port();
-    //ElectionServiceImpl electionService;
+    stringstream electionServiceAddress;
+    electionServiceAddress << configuration->curNodeConfig().host << ":" << configuration->curNodeConfig().electionPort;
+    ElectionServiceImpl electionService;
 
-    //grpc::ServerBuilder builder;
-    //builder.AddListeningPort(serverAddress.str(), grpc::InsecureServerCredentials());
-    //builder.RegisterService(&electionService);
-    //unique_ptr<grpc::Server> server(builder.BuildAndStart());
+    grpc::ServerBuilder electionServiceBuilder;
+    electionServiceBuilder.AddListeningPort(electionServiceAddress.str(), grpc::InsecureServerCredentials());
+    electionServiceBuilder.RegisterService(&electionService);
+    unique_ptr<grpc::Server> electionServiceServer(electionServiceBuilder.BuildAndStart());
 
-    //logger->info("Node listening on port {}...", configuration->ip());
-    //server->Wait();
+    logger->info("Node listening on port {} for election...", configuration->curNodeConfig().electionPort);
+    electionServiceServer->Wait();
     return 0;
 }
