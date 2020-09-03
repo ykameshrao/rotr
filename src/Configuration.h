@@ -26,7 +26,6 @@ namespace rotr {
         string clusterId;
         string clusterName;
         string dataDirPath;
-        string logDirPath;
         uint16_t tick;
         unordered_map <string, node> nodes;
     };

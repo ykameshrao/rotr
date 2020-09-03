@@ -42,7 +42,6 @@ rotr::Configuration::Configuration(int argc, char **argv) {
     logger->info("NodeId: {}", nodeId());
     logger->info("Rotr Service be reachable at: {}", clusterConfig().nodes[nodeId()].rotrPort);
     logger->info("Rotr Data Dir at: {}", clusterConfig().dataDirPath);
-    logger->info("Rotr Log Dir at: {}", clusterConfig().logDirPath);
 }
 
 void rotr::Configuration::parseAndLoadConfig(string configFilePath) {
@@ -50,7 +49,6 @@ void rotr::Configuration::parseAndLoadConfig(string configFilePath) {
     _clusterConfig.clusterId = config["clusterId"].as<string>();
     _clusterConfig.clusterName = config["clusterName"].as<string>();
     _clusterConfig.dataDirPath = config["dataDir"].as<string>();
-    _clusterConfig.logDirPath = config["logDir"].as<string>();
     _clusterConfig.tick = config["tick"].as<uint16_t>();
 
     YAML::Node rotrNodes = config["nodes"];

@@ -1,7 +1,6 @@
 clusterId: 'Local'
 clusterName: 'Rotr-Local'
 dataDir: '/tmp/rotr'
-logDir: '/tmp/rotr-svc-logs/'
 tick: 1000
 nodes:
   - id: 'rotr.1'
