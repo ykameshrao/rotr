@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
                  "                                                                            \n"
                  "                                                                            ");
 
-    //--start-at 0.0.0.0:50051 --data-dir-path /tmp/rotr --cluster-id Local
+    // Command Line Params: --node-id rotr.1 --config-path <path-to-config>/server.yaml
     unique_ptr<Configuration> configuration = make_unique<Configuration>(argc, argv);
 
     //stringstream serverAddress;
