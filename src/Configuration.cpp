@@ -20,7 +20,7 @@ rotr::Configuration::Configuration(int argc, char **argv) {
     opt->addUsage("Usage: ");
     opt->addUsage("");
     opt->addUsage("--node-id \t\t\tUser defined identifier for the node from the configured list of nodes");
-    opt->addUsage("--config-path \t\t\tUser defined yaml based configuration for the cluster");
+    opt->addUsage("--config-path \t\tUser defined yaml based configuration for the cluster");
 
     opt->setOption("node-id");
     opt->setOption("config-path");
@@ -33,9 +33,32 @@ rotr::Configuration::Configuration(int argc, char **argv) {
     }
 
     _nodeId = opt->getValue("node-id");
-    _configPath = opt->getValue("config-path");
+    _configFilePath = opt->getValue("config-path");
 
-    //logger->info("Node be reachable at : {}", opt->getValue("start-at"));
-    //logger->info("Node data dir at : {}", opt->getValue("data-dir-path"));
-    //logger->info("ClusterId : {}", opt->getValue("cluster-id"));
+    parseAndLoadConfig(_configFilePath);
+
+    logger->info("Rotr Service be reachable at: {}", clusterConfig().nodes.front().rotrPort);
+    logger->info("Rotr data dir at: {}", clusterConfig().dataDirPath);
+    logger->info("ClusterId: {}", clusterConfig().clusterId);
+    logger->info("NodeId: {}", nodeId());
+}
+
+void rotr::Configuration::parseAndLoadConfig(string configFilePath) {
+    YAML::Node config = YAML::LoadFile(configFilePath);
+    _clusterConfig.clusterId = config["clusterId"].as<string>();
+    _clusterConfig.clusterName = config["clusterName"].as<string>();
+    _clusterConfig.dataDirPath = config["dataDir"].as<string>();
+    _clusterConfig.logDirPath = config["logDir"].as<string>();
+    _clusterConfig.tick = config["tick"].as<uint16_t>();
+
+    YAML::Node rotrNodes = config["nodes"];
+    for (size_t i = 0; i < rotrNodes.size(); i++) {
+        node rotrNode;
+        rotrNode.id = rotrNodes[i]["id"].as<string>();
+        rotrNode.host = rotrNodes[i]["host"].as<string>();
+        rotrNode.rotrPort = rotrNodes[i]["rotrPort"].as<uint16_t>();
+        rotrNode.replicationPort = rotrNodes[i]["replicationPort"].as<uint16_t>();
+        rotrNode.electionPort = rotrNodes[i]["electionPort"].as<uint16_t>();
+        _clusterConfig.nodes.push_back(move(rotrNode));
+    }
 }

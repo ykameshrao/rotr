@@ -5,9 +5,11 @@
 #ifndef ROTR_CONFIGURATION_H
 #define ROTR_CONFIGURATION_H
 
+#include "yaml-cpp/yaml.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <fstream>
 
 using namespace std;
 
@@ -31,7 +33,7 @@ namespace rotr {
 
     class Configuration {
     private:
-        string _configPath;
+        string _configFilePath;
         string _nodeId;
         cluster _clusterConfig;
 
@@ -42,9 +44,11 @@ namespace rotr {
         Configuration(Configuration &&) = delete;
         Configuration &operator=(Configuration &&) = delete;
 
-        string configPath() { return _configPath; }
+        string configPath() { return _configFilePath; }
         string nodeId() { return _nodeId; }
         cluster clusterConfig() { return _clusterConfig; }
+
+        void parseAndLoadConfig(string configFilePath);
     };
 }
 
