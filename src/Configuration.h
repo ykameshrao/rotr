@@ -28,7 +28,7 @@ namespace rotr {
         string dataDirPath;
         string logDirPath;
         uint16_t tick;
-        vector <node> nodes;
+        unordered_map <string, node> nodes;
     };
 
     class Configuration {

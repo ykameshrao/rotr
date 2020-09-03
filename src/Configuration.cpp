@@ -37,7 +37,7 @@ rotr::Configuration::Configuration(int argc, char **argv) {
 
     parseAndLoadConfig(_configFilePath);
 
-    logger->info("Rotr Service be reachable at: {}", clusterConfig().nodes.front().rotrPort);
+    logger->info("Rotr Service be reachable at: {}", clusterConfig().nodes[nodeId()].rotrPort);
     logger->info("Rotr data dir at: {}", clusterConfig().dataDirPath);
     logger->info("ClusterId: {}", clusterConfig().clusterId);
     logger->info("NodeId: {}", nodeId());
@@ -59,6 +59,6 @@ void rotr::Configuration::parseAndLoadConfig(string configFilePath) {
         rotrNode.rotrPort = rotrNodes[i]["rotrPort"].as<uint16_t>();
         rotrNode.replicationPort = rotrNodes[i]["replicationPort"].as<uint16_t>();
         rotrNode.electionPort = rotrNodes[i]["electionPort"].as<uint16_t>();
-        _clusterConfig.nodes.push_back(move(rotrNode));
+        _clusterConfig.nodes[rotrNode.id] = move(rotrNode);
     }
 }
