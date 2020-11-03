@@ -15,6 +15,7 @@ namespace rotr {
     class ReplicationServiceImpl final : public rotr::ReplicationService::Service {
         unique_ptr<ClusterHandler> _clusterHandler;
     public:
+        ReplicationServiceImpl() {}
         ReplicationServiceImpl(unique_ptr<ClusterHandler> handler) : _clusterHandler{move(handler)} {}
 
         grpc::Status AppendEntries(::grpc::ServerContext *context, const ::rotr::AppendEntriesRequest *request,
